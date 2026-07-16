@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eduver Gutierrez | Data Engineer &amp; Full Stack Developer</title>
+<meta name="description" content="Portafolio de Eduver Andres Gutierrez Narvaez — Data Engineer y Full Stack Software Developer. Python, FastAPI, Vue.js, SQL, Snowflake, AWS, Oracle, ETL.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="preloader" id="preloader">
+  <div class="preloader-inner">
+    <div class="preloader-logo">EG</div>
+    <div class="preloader-bar"><span></span></div>
+    <div class="preloader-text">cargando portafolio…</div>
+  </div>
+</div>
+
+<div class="progress-bar" id="progressBar"></div>
+<canvas id="bgCanvas"></canvas>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="logo">EG<span>.</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home" class="nav-link active" data-section="home">Inicio</a>
+      <a href="#perfil" class="nav-link" data-section="perfil">Perfil</a>
+      <a href="#experiencia" class="nav-link" data-section="experiencia">Experiencia</a>
+      <a href="#docencia" class="nav-link" data-section="docencia">Docencia</a>
+      <a href="#proyectos" class="nav-link" data-section="proyectos">Proyectos</a>
+      <a href="#habilidades" class="nav-link" data-section="habilidades">Habilidades</a>
+      <a href="#educacion" class="nav-link" data-section="educacion">Educación</a>
+      <a href="#contacto" class="nav-link" data-section="contacto">Contacto</a>
+    </nav>
+    <a href="assets/Eduver_Gutierrez_CV.pdf" download class="btn btn-small nav-cv">Descargar CV</a>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-content reveal">
+      <p class="hero-kicker">👋 Hola, soy</p>
+      <h1 class="hero-name">Eduver Andres <span class="text-gradient">Gutierrez Narvaez</span></h1>
+      <h2 class="hero-role">
+        <span id="typed"></span><span class="cursor-blink">|</span>
+      </h2>
+      <p class="hero-desc">
+        Ingeniero de datos y desarrollador de software con más de 3 años de experiencia
+        construyendo pipelines ETL/ELT, APIs y soluciones en la nube que convierten datos
+        en decisiones.
+      </p>
+      <div class="hero-stack">
+        <span>Python</span><span>FastAPI</span><span>Vue.js</span><span>SQL</span>
+        <span>Snowflake</span><span>AWS</span><span>Oracle</span><span>ETL</span><span>APIs REST</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#contacto" class="btn btn-primary">Hablemos <span class="btn-arrow">→</span></a>
+        <a href="assets/Eduver_Gutierrez_CV.pdf" download class="btn btn-outline">Descargar CV</a>
+      </div>
+      <div class="hero-socials">
+        <a href="mailto:eduverjimenez07@gmail.com" title="Email" class="social-btn">✉️</a>
+        <a href="https://wa.me/573024345803" target="_blank" rel="noopener" title="WhatsApp" class="social-btn">💬</a>
+        <a href="https://www.linkedin.com/in/eduver-gutierrez-437408386" target="_blank" rel="noopener" title="LinkedIn" class="social-btn">in</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <div class="orbit-wrap" id="orbitWrap">
+        <div class="orbit-ring-glow"></div>
+        <div class="orbit-core">⚡</div>
+        <div class="orbit orbit-1"><span>SQL</span><span class="opp">React</span></div>
+        <div class="orbit orbit-2"><span>AWS</span><span class="opp">PHP</span></div>
+        <div class="orbit orbit-3"><span>Python</span><span class="opp">Node.js</span></div>
+        <div class="orbit orbit-4"><span>Vue</span><span class="opp">Angular</span></div>
+        <div class="orbit orbit-5"><span>ETL</span><span class="opp">Laravel</span></div>
+      </div>
+    </div>
+    <a href="#perfil" class="scroll-cue" aria-label="Bajar">
+      <span></span>
+    </a>
+  </section>
+
+  <!-- PERFIL -->
+  <section id="perfil" class="section">
+    <div class="section-head reveal">
+      <p class="section-tag">01 · Sobre mí</p>
+      <h2 class="section-title">Perfil profesional</h2>
+    </div>
+    <div class="perfil-grid">
+      <p class="perfil-text reveal">
+        Ingeniero de datos y desarrollador de software con más de <strong>3 años de experiencia</strong>
+        en análisis de información, desarrollo backend y soluciones orientadas a datos. Experiencia
+        trabajando con <strong>SQL, Oracle, Snowflake y AWS</strong>, así como en el desarrollo de
+        <strong>APIs y aplicaciones web</strong>. Participación en proyectos de modernización de
+        sistemas, optimización de consultas y construcción de <strong>pipelines ETL</strong> para
+        mejorar el rendimiento de aplicaciones y el análisis de información. Adicionalmente,
+        cuento con experiencia como <strong>docente de tecnología e informática</strong>,
+        formando tanto a estudiantes como a otros docentes en herramientas digitales,
+        ofimática y fundamentos de bases de datos.
+      </p>
+      <div class="perfil-stats reveal">
+        <div class="stat-card">
+          <span class="stat-num" data-count="3">0</span><span class="stat-suffix">+</span>
+          <p>Años de experiencia</p>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" data-count="4">0</span>
+          <p>Empresas / proyectos</p>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" data-count="15">0</span><span class="stat-suffix">+</span>
+          <p>Tecnologías dominadas</p>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" data-count="2">0</span>
+          <p>Idiomas (Es / En)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section id="experiencia" class="section section-alt">
+    <div class="section-head reveal">
+      <p class="section-tag">02 · Trayectoria</p>
+      <h2 class="section-title">Experiencia profesional</h2>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <span class="timeline-date">03/2026 – 05/2026 · España</span>
+          <h3>Software Engineer</h3>
+          <p class="timeline-company">TIMIA</p>
+          <ul>
+            <li>Diseñé y desarrollé pipelines ETL/ELT con Snowflake, SQL, Python y PySpark para integrar y transformar datos de múltiples fuentes.</li>
+            <li>Administré y optimicé soluciones de datos en AWS (S3, Lambda, Glue) para automatización, almacenamiento y orquestación.</li>
+            <li>Implementé modelos de datos, optimización de consultas SQL y procesos de validación de calidad.</li>
+            <li>Colaboré con negocio y tecnología en soluciones analíticas, reportes e indicadores estratégicos.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <span class="timeline-date">03/2025 – 02/2026 · Barranquilla, Colombia</span>
+          <h3>Consultor BI</h3>
+          <p class="timeline-company">ICUBO SOLUTIONS</p>
+          <ul>
+            <li>Diseñé y desarrollé pipelines ETL/ELT con Snowflake, SQL y Python para múltiples fuentes de datos.</li>
+            <li>Administré y optimicé soluciones en AWS (S3, Lambda, Glue) para automatización y orquestación de flujos.</li>
+            <li>Implementé modelos de datos y procesos de validación, garantizando calidad y rendimiento.</li>
+            <li>Colaboré en soluciones analíticas, reportes e indicadores para decisiones estratégicas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <span class="timeline-date">07/2022 – 12/2024 · Barranquilla, Colombia</span>
+          <h3>Analista de Información – Desarrollador de Software Junior</h3>
+          <p class="timeline-company">GECELCA S.A.S</p>
+          <ul>
+            <li>Desarrollé aplicaciones corporativas con Python (FastAPI), Vue.js, Oracle y SQL Server.</li>
+            <li>Apoyé la migración de sistemas legacy hacia arquitecturas basadas en APIs REST.</li>
+            <li>Optimicé consultas SQL y procedimientos almacenados, mejorando el rendimiento del sistema.</li>
+            <li>Construí y mantuve procesos ETL básicos con Python y SQL.</li>
+            <li>Trabajé con Azure Data Factory, Azure Data Lake, Databricks, Git y APIs REST.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <span class="timeline-date">01/2022 – 06/2022 (6 meses) · Barranquilla, Colombia</span>
+          <h3>Docente Regular de Tecnología, Informática y Ofimática</h3>
+          <p class="timeline-company">Institución Educativa Pública del Distrito de Barranquilla</p>
+          <ul>
+            <li>Impartí clases regulares de tecnología, informática y herramientas de ofimática.</li>
+            <li>Enseñé fundamentos de bases de datos y SQL a nivel básico, usando MySQL y bases de datos locales como material didáctico.</li>
+            <li>Diseñé ejercicios prácticos para introducir a los estudiantes en la lógica de consultas SQL.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DOCENCIA -->
+  <section id="docencia" class="section">
+    <div class="section-head reveal">
+      <p class="section-tag">03 · Otro perfil</p>
+      <h2 class="section-title">Docencia en Tecnología</h2>
+      <p class="contact-sub">Además de mi perfil técnico, tengo experiencia formando personas en tecnología e informática — desde educación básica hasta capacitación docente.</p>
+    </div>
+
+    <div class="docencia-grid">
+
+      <article class="docencia-card reveal">
+        <div class="docencia-icon">🎓</div>
+        <span class="timeline-date">06/2025 – 12/2025 · Departamento del Magdalena</span>
+        <h3>Formador en Tecnología y Metodologías Educativas</h3>
+        <p class="timeline-company">Diplomado REVOTIC – Gobernación del Magdalena / Universidad Americana</p>
+        <ul>
+          <li>Capacitación STEM: instruí a docentes en pensamiento computacional, herramientas digitales e innovación educativa.</li>
+          <li>Diseñé contenidos pedagógicos para integrar tecnología en el aula de forma efectiva.</li>
+        </ul>
+      </article>
+
+      <article class="docencia-card reveal">
+        <div class="docencia-icon">🖥️</div>
+        <span class="timeline-date">01/2022 – 06/2022 (6 meses) · Barranquilla, Colombia</span>
+        <h3>Docente Regular de Tecnología, Informática y Ofimática</h3>
+        <p class="timeline-company">Institución Educativa Pública del Distrito de Barranquilla</p>
+        <ul>
+          <li>Impartí clases regulares de tecnología, informática y herramientas de ofimática.</li>
+          <li>Enseñé fundamentos de bases de datos y SQL a nivel básico, usando MySQL y bases de datos locales como material didáctico.</li>
+          <li>Diseñé ejercicios prácticos para introducir a los estudiantes en la lógica de consultas SQL.</li>
+        </ul>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <!--
+    Cómo agregar un proyecto real:
+    1. Duplica un bloque <article class="project-card"> (los de ejemplo abajo).
+    2. Cambia project-thumb (emoji o <img src="assets/proyectos/tu-imagen.png">), título, descripción y tags.
+    3. En project-links, reemplaza los href="#" por tu demo y repositorio reales.
+    4. Borra la clase "ghost" y el atributo del bloque "próximamente" que ya no necesites.
+  -->
+  <section id="proyectos" class="section section-alt">
+    <div class="section-head reveal">
+      <p class="section-tag">04 · Portafolio</p>
+      <h2 class="section-title">Proyectos</h2>
+      <p class="contact-sub">Selección de proyectos personales y profesionales. Esta sección está en construcción — muy pronto más casos reales.</p>
+    </div>
+
+    <div class="projects-grid">
+
+      <article class="project-card featured reveal">
+        <div class="project-thumb img-thumb">
+          <img src="assets/proyectos/nexus-preview.png" alt="Captura de pantalla del sitio NEXUS Tecnología Inteligente" loading="lazy">
+        </div>
+        <h3>NEXUS · Tecnología Inteligente</h3>
+        <p class="project-desc">
+          Estudio de desarrollo de software y ciencia de datos que fundé. Diseñamos software
+          a medida, aplicaciones web y móviles, dashboards analíticos e integración de IA
+          generativa para convertir ideas y datos en soluciones reales.
+        </p>
+        <div class="tag-cloud">
+          <span>Desarrollo Web</span><span>Ciencia de Datos</span><span>IA Generativa</span>
+          <span>APIs REST</span><span>Cloud</span>
+        </div>
+        <div class="project-links">
+          <a href="https://nexus-inteligente.vercel.app" target="_blank" rel="noopener">Ver sitio en vivo ↗</a>
+        </div>
+      </article>
+
+      <article class="project-card featured reveal">
+        <div class="project-thumb img-thumb">
+          <img src="assets/proyectos/fincayraiz-preview.png" alt="Captura de pantalla del sitio Finca y Raíz" loading="lazy">
+        </div>
+        <h3>Finca y Raíz</h3>
+        <p class="project-desc">
+          Plataforma inmobiliaria con asesoría inteligente: marketplace de propiedades
+          (casas, apartamentos y fincas) potenciado por un asesor con IA que entiende las
+          necesidades del usuario antes de recomendar inmuebles.
+        </p>
+        <div class="tag-cloud">
+          <span>Marketplace</span><span>IA Generativa</span><span>Frontend moderno</span>
+          <span>APIs REST</span>
+        </div>
+        <div class="project-links">
+          <a href="https://finca-y-raiz.vercel.app/" target="_blank" rel="noopener">Ver sitio en vivo ↗</a>
+        </div>
+      </article>
+
+      <article class="project-card ghost reveal">
+        <div class="project-thumb">🧪</div>
+        <h3>En construcción</h3>
+        <p class="project-desc">Ideal para un caso de ETL, un dashboard de datos o una API con FastAPI.</p>
+        <div class="tag-cloud">
+          <span>En camino</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- HABILIDADES -->
+  <section id="habilidades" class="section">
+    <div class="section-head reveal">
+      <p class="section-tag">05 · Stack</p>
+      <h2 class="section-title">Habilidades</h2>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">🧬</div>
+        <h3>Ingeniería de Datos</h3>
+        <div class="tag-cloud">
+          <span>ETL Pipelines</span><span>Python</span><span>PySpark</span><span>Integración de datos</span>
+          <span>Transformación y limpieza</span><span>Modelado de datos</span><span>Azure Data Factory</span>
+          <span>Azure Data Lake</span><span>Databricks</span><span>APIs REST</span><span>Dataiku</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">⚙️</div>
+        <h3>Software &amp; Backend</h3>
+        <div class="tag-cloud">
+          <span>Python</span><span>FastAPI</span><span>PHP</span><span>Laravel</span><span>Node.js</span>
+          <span>Express</span><span>Django</span><span>APIs REST</span><span>Arquitectura de servicios</span>
+          <span>Lógica de negocio</span><span>Autenticación</span><span>Validaciones</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🖥️</div>
+        <h3>Desarrollo Web</h3>
+        <div class="tag-cloud">
+          <span>Vue.js</span><span>React</span><span>Angular</span><span>Quasar</span>
+          <span>Integración Frontend–Backend</span><span>Interfaces dinámicas</span><span>Consumo de APIs</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🗄️</div>
+        <h3>Bases de Datos</h3>
+        <div class="tag-cloud">
+          <span>Oracle</span><span>SQL Server</span><span>SQL</span><span>Modelado de datos</span>
+          <span>Optimización de consultas</span><span>Procedimientos almacenados</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">☁️</div>
+        <h3>Cloud Computing</h3>
+        <div class="tag-cloud">
+          <span>AWS</span><span>S3</span><span>Lambda</span><span>Glue</span><span>Procesamiento en la nube</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🔗</div>
+        <h3>Integración de Sistemas</h3>
+        <div class="tag-cloud">
+          <span>Diseño de APIs</span><span>Integración entre aplicaciones</span><span>Gestión de información</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🤝</div>
+        <h3>Colaboración</h3>
+        <div class="tag-cloud">
+          <span>Git</span><span>Control de versiones</span><span>Scrum</span><span>Kanban</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCACION -->
+  <section id="educacion" class="section section-alt">
+    <div class="section-head reveal">
+      <p class="section-tag">06 · Formación</p>
+      <h2 class="section-title">Educación &amp; Cursos</h2>
+    </div>
+
+    <div class="edu-grid">
+      <div class="edu-col reveal">
+        <h3 class="edu-col-title">Educación formal</h3>
+        <div class="edu-item">
+          <div class="edu-icon">🎓</div>
+          <div>
+            <h4>Ingeniería de Sistemas <span>· Cursando 7° semestre</span></h4>
+            <p>Universidad Politécnico de la Costa Atlántica · Barranquilla, Colombia</p>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-icon">🎓</div>
+          <div>
+            <h4>Tecnólogo en Desarrollo de Software</h4>
+            <p>Universidad Politécnico de la Costa Atlántica · Barranquilla, Colombia</p>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-icon">🎓</div>
+          <div>
+            <h4>Tecnólogo en Análisis y Desarrollo de Sistemas de Información</h4>
+            <p>SENA · Barranquilla, Colombia</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="edu-col reveal">
+        <h3 class="edu-col-title">Cursos y certificaciones</h3>
+        <div class="edu-item">
+          <div class="edu-icon">📜</div>
+          <div>
+            <h4>Oracle Next Education</h4>
+            <p>Desarrollo de Software y Bases de Datos · ORACLE</p>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-icon">📜</div>
+          <div>
+            <h4>Análisis de Datos – Nivel Avanzado</h4>
+            <p>Talento Tech / Universidad Libre</p>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-icon">📜</div>
+          <div>
+            <h4>Fundamentos de Programación</h4>
+            <p>Universidad Tecnológica de Pereira – Misión TIC</p>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-icon">📜</div>
+          <div>
+            <h4>Inglés Intermedio Conversacional</h4>
+            <p>SENA · Barranquilla, Colombia</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section contact-section">
+    <div class="section-head reveal">
+      <p class="section-tag">07 · Contacto</p>
+      <h2 class="section-title">¿Trabajamos juntos?</h2>
+      <p class="contact-sub">Disponible para nuevas oportunidades como Data Engineer o Full Stack Developer. Escríbeme y conversemos.</p>
+    </div>
+
+    <div class="contact-grid reveal">
+      <a class="contact-card" href="mailto:eduverjimenez07@gmail.com">
+        <div class="contact-icon">✉️</div>
+        <h4>Email</h4>
+        <p>eduverjimenez07@gmail.com</p>
+      </a>
+      <a class="contact-card" href="https://wa.me/573024345803" target="_blank" rel="noopener">
+        <div class="contact-icon">💬</div>
+        <h4>WhatsApp</h4>
+        <p>+57 302 434 5803</p>
+      </a>
+      <a class="contact-card" href="tel:+573332369167">
+        <div class="contact-icon">📞</div>
+        <h4>Teléfono</h4>
+        <p>+57 333 236 9167</p>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/eduver-gutierrez-437408386" target="_blank" rel="noopener">
+        <div class="contact-icon">in</div>
+        <h4>LinkedIn</h4>
+        <p>eduver-gutierrez</p>
+      </a>
+    </div>
+
+    <div class="contact-cta reveal">
+      <a href="assets/Eduver_Gutierrez_CV.pdf" download class="btn btn-primary btn-lg">Descargar Hoja de Vida completa ↓</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© <span id="year"></span> Eduver Andres Gutierrez Narvaez · Barranquilla, Colombia</p>
+  <button class="to-top" id="toTop" aria-label="Subir">↑</button>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
