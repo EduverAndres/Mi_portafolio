@@ -29,7 +29,7 @@ export const CONTACT = {
 
 // El reclutador lo descarga y luego lo busca por nombre de archivo entre
 // decenas de PDF: el nombre tiene que decir quién es y para qué rol.
-export const CV_PATH = '/Eduver_Gutierrez_Data_Engineer_CV.pdf';
+export const CV_PATH = '/Eduver_Gutierrez_CV_Software_Engineer_Backend.pdf';
 
 /** Empresas que aparecen como prueba en la franja del héroe. Orden: más reciente primero. */
 export const COMPANIES = ['TIMIA', 'ICUBO', 'GECELCA'] as const;
