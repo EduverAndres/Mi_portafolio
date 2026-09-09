@@ -44,6 +44,13 @@ const { projects } = dict;
             />
 
             <div class:list={[imageFirst ? 'lg:order-2' : 'lg:order-1']}>
+              {/* Etiqueta de estado: cuando un proyecto todavía no es un
+                  negocio en marcha, se dice antes de describirlo. */}
+              {copy.status && (
+                <p class="mb-3 inline-block rounded-pill border border-amber/40 bg-amber/10 px-3 py-1 text-meta font-medium text-amber">
+                  {copy.status}
+                </p>
+              )}
               <h3 class="font-display text-2xl font-semibold text-text">{copy.name}</h3>
               <p class="mt-1 text-meta text-muted">{copy.role}</p>
 

@@ -148,14 +148,16 @@ export const en: Dict = {
     items: {
       nexus: {
         name: 'NEXUS — Tecnología Inteligente',
-        role: 'Founder',
+        status: 'Business idea in progress',
+        role: 'Personal venture',
         description:
-          'Software development and data science studio I founded. We design custom software, web and mobile applications, analytical dashboards, and generative AI integrations.',
+          'A software and data science venture of my own that I am building. The offering is defined —custom software, web and mobile applications, analytical dashboards and generative AI integrations— and the site is already live, but the business is still at an early stage.',
         tags: ['Web development', 'Data science', 'Generative AI', 'Cloud'],
         imageAlt: 'Home page of the NEXUS Tecnología Inteligente website',
       },
       fincayraiz: {
         name: 'Finca y Raíz',
+        status: null,
         role: 'Development and architecture',
         description:
           'Real estate marketplace for houses, apartments and country properties, with an AI advisor that interprets what the user needs before recommending listings.',

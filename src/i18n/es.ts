@@ -163,14 +163,20 @@ export const es = {
     items: {
       nexus: {
         name: 'NEXUS — Tecnología Inteligente',
-        role: 'Fundador',
+        // Antes decía "Fundador" y "Diseñamos software a medida", en plural:
+        // se leía como un estudio con equipo ya operando para clientes. Es una
+        // iniciativa en marcha, y así se declara. Un reclutador técnico va a
+        // preguntar por ella en entrevista.
+        status: 'Idea de negocio en proceso',
+        role: 'Proyecto propio',
         description:
-          'Estudio de desarrollo de software y ciencia de datos que fundé. Diseñamos software a medida, aplicaciones web y móviles, tableros analíticos e integración de IA generativa.',
+          'Iniciativa propia de software y ciencia de datos que estoy levantando. La propuesta es clara —software a medida, aplicaciones web y móviles, tableros analíticos e integración de IA generativa— y el sitio ya está en línea, pero el negocio sigue en fase temprana.',
         tags: ['Desarrollo web', 'Ciencia de datos', 'IA generativa', 'Cloud'],
         imageAlt: 'Página de inicio del sitio de NEXUS Tecnología Inteligente',
       },
       fincayraiz: {
         name: 'Finca y Raíz',
+        status: null,
         role: 'Desarrollo y arquitectura',
         description:
           'Marketplace inmobiliario de casas, apartamentos y fincas, con un asesor de IA que interpreta lo que necesita el usuario antes de recomendarle inmuebles.',
