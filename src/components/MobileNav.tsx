@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { MenuIcon, CloseIcon } from './icons';
 
 interface NavLink {
   href: string;
@@ -68,11 +68,7 @@ export default function MobileNav({ links, labels, cvPath }: Props) {
         aria-label={open ? labels.close : labels.open}
         className="grid h-10 w-10 place-items-center text-ink-fg"
       >
-        {open ? (
-          <X size={20} strokeWidth={1.75} aria-hidden="true" />
-        ) : (
-          <Menu size={20} strokeWidth={1.75} aria-hidden="true" />
-        )}
+        {open ? <CloseIcon /> : <MenuIcon />}
       </button>
 
       {open && (

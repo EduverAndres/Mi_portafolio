@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
+import preact from '@astrojs/preact';
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
@@ -18,23 +18,13 @@ export default defineConfig({
     },
   },
 
-  integrations: [react()],
+  // Preact con capa de compatibilidad: los componentes siguen escritos como
+  // React (mismos hooks, mismo JSX, lucide-react incluido), pero el runtime que
+  // baja al navegador pasa de unos 210 KB a poco más de 10 KB.
+  integrations: [preact({ compat: true })],
 
   vite: {
     plugins: [tailwindcss()],
 
-    resolve: {
-      alias: {
-        // lucide-react 1.x no declara "exports", así que Node toma su build
-        // CommonJS y los imports con nombre revientan al prerenderizar.
-        // Apuntando al bundle ESM se resuelve en servidor y en cliente, y
-        // Rollup sigue haciendo tree-shaking: solo entran los iconos usados.
-        'lucide-react': 'lucide-react/dist/esm/lucide-react.mjs',
-      },
-    },
-
-    ssr: {
-      noExternal: ['lucide-react'],
-    },
   },
 });

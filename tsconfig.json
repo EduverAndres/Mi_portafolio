@@ -4,7 +4,15 @@
   "exclude": ["dist"],
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "strictNullChecks": true
+    "jsxImportSource": "preact",
+    "strictNullChecks": true,
+    // lucide-react y los componentes declaran tipos contra "react".
+    // preact/compat los provee, así que se redirigen aquí igual que hace
+    // Vite en tiempo de compilación.
+    "paths": {
+      "react": ["./node_modules/preact/compat/"],
+      "react-dom": ["./node_modules/preact/compat/"],
+      "react/jsx-runtime": ["./node_modules/preact/jsx-runtime/"]
+    }
   }
 }

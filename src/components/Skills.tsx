@@ -1,5 +1,5 @@
 import { useId, useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDownIcon } from './icons';
 
 interface SkillGroup {
   id: string;
@@ -54,12 +54,7 @@ export default function Skills({ core, groups, labels }: Props) {
         className="mt-8 inline-flex items-center gap-2 text-meta font-semibold text-signal underline decoration-signal/35 underline-offset-6 transition-colors hover:decoration-signal"
       >
         {expanded ? labels.less : labels.more}
-        <ChevronDown
-          size={16}
-          strokeWidth={2}
-          aria-hidden="true"
-          className={expanded ? 'rotate-180' : undefined}
-        />
+        <ChevronDownIcon class={expanded ? 'rotate-180' : undefined} />
       </button>
 
       {/* El panel se muestra al pedirlo: el movimiento responde a una acción,
