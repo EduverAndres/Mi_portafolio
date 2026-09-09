@@ -5,24 +5,27 @@
  * Sobre los marcadores "FALTA MÉTRICA": cada bullet está redactado para leerse
  * completo SIN la cifra, de modo que el sitio nunca muestre un hueco. El
  * comentario indica qué número debería insertarse y en qué parte de la frase.
+ * Ningún dato de este archivo está inventado.
  */
 
 export const es = {
   meta: {
     title: 'Eduver Gutiérrez — Data Engineer y Full Stack Developer',
     description:
-      'Data Engineer y Full Stack Developer con más de 3 años de experiencia. Pipelines ETL/ELT en Snowflake y AWS, APIs con Python y FastAPI. Barranquilla, Colombia. Disponible para nuevas oportunidades.',
+      'Data Engineer y Full Stack Developer con más de 3 años de experiencia. Pipelines ETL/ELT en Snowflake, AWS y Databricks con Python, PySpark y SQL, y APIs con FastAPI, Spring Boot y Vue.js. Barranquilla, Colombia. Disponible en remoto o con reubicación.',
     ogAlt: 'Eduver Gutiérrez, Data Engineer y Full Stack Developer',
   },
 
   nav: {
-    perfil: 'Perfil',
     experiencia: 'Experiencia',
     proyectos: 'Proyectos',
     habilidades: 'Habilidades',
+    docencia: 'Docencia',
     educacion: 'Educación',
     contacto: 'Contacto',
     cv: 'Descargar CV',
+    github: 'GitHub',
+    linkedin: 'LinkedIn',
     openMenu: 'Abrir menú de navegación',
     closeMenu: 'Cerrar menú de navegación',
     skipToContent: 'Saltar al contenido',
@@ -33,27 +36,51 @@ export const es = {
 
   hero: {
     available: 'Disponible para nuevas oportunidades',
-    roles: ['Data Engineer', 'Full Stack Developer'],
-    value: 'Construyo pipelines ETL/ELT y APIs que corren en producción.',
-    evidence: {
-      experience: 'Años de experiencia',
-      experienceValue: '3+',
-      companies: 'Empresas',
-      stack: 'Stack principal',
-    },
-    ctaPrimary: 'Descargar CV',
-    ctaSecondary: 'Contactar',
-    cvHint: 'PDF, se abre en una pestaña nueva',
-  },
-
-  about: {
-    title: 'Perfil',
-    body: [
-      'Ingeniero de datos y desarrollador de software. Trabajo en los dos extremos del recorrido de un dato: la infraestructura que lo mueve y lo limpia, y la aplicación donde alguien finalmente lo usa para decidir.',
-      'He construido pipelines ETL/ELT sobre Snowflake y AWS, modelado almacenes analíticos y desarrollado APIs y aplicaciones internas con Python, FastAPI, Vue.js, Oracle y SQL Server. También acompaño migraciones de sistemas legacy hacia arquitecturas basadas en APIs.',
-      'Vivo en Barranquilla, Colombia, y trabajo en remoto con equipos de otros países.',
+    availableMode: 'Remoto / Reubicación',
+    /** Ancla del héroe: la palabra por la que quiere ser encontrado. */
+    anchor: 'Data Engineer',
+    /**
+     * Refuerzo: va en segundo plano respecto al ancla, pero nombrado con
+     * tecnologías concretas para que el perfil full stack se lea de verdad
+     * y no quede como una nota al pie.
+     */
+    secondaryRole: 'Full Stack Developer',
+    secondaryStack: 'FastAPI · Spring Boot · Vue.js · Angular',
+    /** 18 palabras. Tiene que decir qué construye y para qué sirve. */
+    positioning:
+      'Construyo pipelines ETL/ELT en Snowflake y AWS, y las APIs que ponen esos datos a trabajar en producción.',
+    metrics: [
+      {
+        // FALTA MÉTRICA: sus fechas (jul 2022 → hoy) dan más de 4 años.
+        // Se mantiene el "3+" que él declara hasta que confirme el cambio.
+        value: '3+',
+        label: 'años de experiencia',
+      },
+      {
+        // SUSTITUTO TEMPORAL. Aquí debe ir la métrica dura de datos: número de
+        // pipelines en producción, o volumen procesado (GB/día, millones de
+        // filas). Mientras no la tenga, va un dato igualmente verificable:
+        // trabajó sobre AWS (TIMIA, ICUBO) y sobre Azure (GECELCA).
+        value: '2',
+        label: 'nubes en producción, AWS y Azure',
+      },
+      {
+        value: '3',
+        label: 'empresas: TIMIA, ICUBO, GECELCA',
+      },
     ],
-    languages: 'Español nativo. Inglés intermedio conversacional.',
+    ctaPrimary: 'Descargar CV',
+    ctaSecondary: 'Ver GitHub',
+    cvHint: 'PDF, se abre en una pestaña nueva',
+    /** Etiquetas del diagrama de pipeline animado del héroe. */
+    pipeline: {
+      title: 'Recorrido típico de un pipeline que construyo',
+      sources: 'Fuentes',
+      ingest: 'Ingesta',
+      transform: 'Transformación',
+      warehouse: 'Warehouse',
+      serve: 'Analítica',
+    },
   },
 
   experience: {
@@ -64,18 +91,16 @@ export const es = {
         id: 'timia',
         role: 'Software Engineer',
         company: 'TIMIA',
-        // Rótulo confirmado por Eduver: fue un encargo con alcance y fecha de fin
-        // definidos desde el inicio, no un empleo interrumpido.
+        // Rótulo confirmado por Eduver: fue un encargo con alcance y fecha de
+        // fin definidos desde el inicio, no un empleo interrumpido.
         contract: 'Contrato por proyecto, 3 meses',
         period: 'mar — may 2026',
-        year: '2026',
         location: 'España',
         bullets: [
           // FALTA MÉTRICA: número de fuentes integradas y volumen procesado.
-          // Ej: "...consolidar 14 fuentes heterogéneas (~40 GB diarios) en un modelo..."
+          // Ej: "...consolidar 14 fuentes (~40 GB diarios) en un modelo..."
           'Construí pipelines ETL/ELT en Snowflake con Python y PySpark para consolidar fuentes heterogéneas en un único modelo analítico.',
-          // FALTA MÉTRICA: frecuencia de ejecución o duración de la ventana de carga.
-          // Ej: "...cargas que corren cada 4 horas sin intervención manual."
+          // FALTA MÉTRICA: frecuencia de ejecución o duración de la ventana.
           'Orquesté las cargas en AWS con Glue, Lambda y S3, dejando el proceso automatizado y con reintentos ante fallos.',
           // FALTA MÉTRICA: porcentaje de cargas rechazadas o incidencias evitadas.
           'Definí validaciones de calidad que detienen la publicación cuando una carga llega incompleta o fuera de rango.',
@@ -89,19 +114,18 @@ export const es = {
         company: 'ICUBO Solutions',
         contract: null,
         period: 'mar 2025 — feb 2026',
-        year: '2025 — 2026',
         location: 'Barranquilla, Colombia',
         bullets: [
-          // FALTA MÉTRICA: número de modelos, tablas o áreas de negocio cubiertas.
+          // FALTA MÉTRICA: número de modelos, tablas o áreas de negocio.
           'Modelé el almacén analítico en Snowflake con esquemas en estrella, para que las áreas de negocio consultaran sus indicadores sin depender del equipo técnico.',
-          // FALTA MÉTRICA: la más valiosa de toda la página. Tiempo antes y después.
+          // FALTA MÉTRICA: la más valiosa de la página. Tiempo antes y después.
           // Ej: "...bajando los reportes críticos de 45 s a 6 s."
           'Reescribí las consultas SQL más lentas y ajusté el modelo de datos, acortando el tiempo de respuesta de los reportes críticos.',
-          'Traduje requerimientos de negocio en indicadores y tableros, sosteniendo el levantamiento directamente con el cliente.',
+          'Provisioné infraestructura de datos con Terraform e IAM, dejando los accesos y los recursos versionados en lugar de configurados a mano.',
           // FALTA MÉTRICA: horas de trabajo manual eliminadas al mes.
           'Automaticé con Python y SQL cargas recurrentes que antes se ejecutaban a mano.',
         ],
-        stack: ['Snowflake', 'SQL', 'Python', 'AWS', 'Modelado dimensional'],
+        stack: ['Snowflake', 'SQL', 'Python', 'AWS', 'Terraform', 'IAM'],
       },
       {
         id: 'gecelca',
@@ -109,19 +133,17 @@ export const es = {
         company: 'GECELCA S.A.S',
         contract: null,
         period: 'jul 2022 — dic 2024',
-        year: '2022 — 2024',
         location: 'Barranquilla, Colombia',
         bullets: [
           // FALTA MÉTRICA: cuántas aplicaciones y cuántos usuarios internos.
-          // Ej: "...tres aplicaciones internas que usan ~120 personas del área operativa."
           'Desarrollé aplicaciones internas con FastAPI y Vue.js sobre Oracle y SQL Server, usadas por las áreas operativas de la compañía.',
+          'Construí procesos ETL con Python y SQL, y trabajé con Azure Data Factory, Data Lake y Databricks para las cargas analíticas.',
           // FALTA MÉTRICA: cuántos sistemas o integraciones se migraron.
           'Acompañé la migración de sistemas legacy hacia APIs REST, reemplazando integraciones acopladas directamente a la base de datos.',
           // FALTA MÉTRICA: mejora concreta en los reportes más lentos.
           'Optimicé consultas y procedimientos almacenados en Oracle, atacando los reportes que más demoraban.',
-          'Construí procesos ETL con Python y SQL, y trabajé con Azure Data Factory, Data Lake y Databricks para las cargas analíticas.',
         ],
-        stack: ['Python', 'FastAPI', 'Vue.js', 'Oracle', 'SQL Server', 'Azure Data Factory', 'Databricks'],
+        stack: ['Python', 'FastAPI', 'Azure Data Factory', 'Databricks', 'Oracle', 'SQL Server', 'Vue.js'],
       },
     ],
   },
@@ -130,13 +152,21 @@ export const es = {
     title: 'Proyectos',
     visit: 'Ver sitio en vivo',
     opensNewTab: 'se abre en una pestaña nueva',
+    /** Bloque reservado para el caso de ingeniería de datos que falta. */
+    reserved: {
+      label: 'En preparación',
+      name: 'Pipeline de datos de extremo a extremo',
+      description:
+        'Ingesta desde una API pública, transformación y carga en un warehouse, orquestado y con un tablero al final. Repositorio público y documentado.',
+      note: 'Este es el proyecto que más peso tiene para una vacante de Data Engineer. El bloque ya está maquetado: en cuanto exista el repositorio, se publica aquí.',
+    },
     items: {
       nexus: {
         name: 'NEXUS — Tecnología Inteligente',
         role: 'Fundador',
         description:
           'Estudio de desarrollo de software y ciencia de datos que fundé. Diseñamos software a medida, aplicaciones web y móviles, tableros analíticos e integración de IA generativa.',
-        tags: ['Desarrollo web', 'Ciencia de datos', 'IA generativa', 'APIs REST', 'Cloud'],
+        tags: ['Desarrollo web', 'Ciencia de datos', 'IA generativa', 'Cloud'],
         imageAlt: 'Página de inicio del sitio de NEXUS Tecnología Inteligente',
       },
       fincayraiz: {
@@ -144,7 +174,7 @@ export const es = {
         role: 'Desarrollo y arquitectura',
         description:
           'Marketplace inmobiliario de casas, apartamentos y fincas, con un asesor de IA que interpreta lo que necesita el usuario antes de recomendarle inmuebles.',
-        tags: ['Marketplace', 'IA generativa', 'Frontend', 'APIs REST'],
+        tags: ['Marketplace', 'IA generativa', 'APIs REST'],
         imageAlt: 'Página de búsqueda de propiedades del sitio Finca y Raíz',
       },
     },
@@ -152,34 +182,44 @@ export const es = {
 
   skills: {
     title: 'Habilidades',
-    coreNote: 'Lo que uso a diario',
-    moreLabel: 'Ver el resto del stack',
-    lessLabel: 'Ocultar el resto del stack',
-    groups: [
+    intro: 'Agrupadas por lo que de verdad domino, no por todo lo que he tocado alguna vez.',
+    levels: [
       {
-        id: 'data',
-        name: 'Ingeniería de datos',
-        items: ['ETL / ELT', 'Modelado dimensional', 'Azure Data Factory', 'Azure Data Lake', 'Databricks', 'Dataiku', 'Validación de calidad'],
+        id: 'core',
+        name: 'Core',
+        note: 'Lo que uso a diario y sostengo en una entrevista técnica',
+        items: ['Python', 'SQL', 'Snowflake', 'PySpark', 'AWS · S3, Lambda, Glue', 'FastAPI', 'Databricks'],
       },
       {
-        id: 'backend',
-        name: 'Backend',
-        items: ['Java', 'Spring Boot', 'Node.js', 'Express', 'Django', 'PHP', 'Laravel', 'APIs REST', 'Autenticación'],
+        id: 'solid',
+        name: 'Sólido',
+        note: 'Experiencia real en proyectos, con soltura',
+        items: [
+          'ETL / ELT',
+          'Modelado dimensional',
+          'Vue.js',
+          'Java · Spring Boot',
+          'Oracle',
+          'SQL Server',
+          'Azure Data Factory',
+          'Git',
+        ],
       },
       {
-        id: 'frontend',
-        name: 'Frontend',
-        items: ['React', 'Angular', 'Quasar', 'TypeScript', 'Tailwind CSS'],
-      },
-      {
-        id: 'cloud',
-        name: 'Cloud y bases de datos',
-        items: ['S3', 'Lambda', 'Glue', 'SQL Server', 'Supabase', 'Procedimientos almacenados', 'Optimización de consultas'],
-      },
-      {
-        id: 'ways',
-        name: 'Forma de trabajo',
-        items: ['Git', 'Scrum', 'Kanban', 'Documentación técnica'],
+        id: 'familiar',
+        name: 'Familiarizado',
+        note: 'He trabajado con ello, no lo pondría como mi fuerte',
+        items: [
+          'Terraform',
+          'Laravel',
+          'Angular',
+          'React',
+          'Node.js',
+          'Django',
+          'Dataiku',
+          'Supabase',
+          'TypeScript',
+        ],
       },
     ],
   },
@@ -241,17 +281,17 @@ export const es = {
 
   contact: {
     title: 'Contacto',
-    intro: 'Disponible para posiciones de Data Engineer o Full Stack Developer, incluyendo remoto e internacional.',
+    intro: 'Disponible para posiciones de Data Engineer en remoto, LATAM o España.',
     email: 'Email',
     whatsapp: 'WhatsApp',
-    phone: 'Teléfono',
     linkedin: 'LinkedIn',
+    github: 'GitHub',
     cta: 'Descargar hoja de vida completa',
   },
 
   footer: {
     location: 'Barranquilla, Colombia',
-    builtWith: 'Hecho con Astro, React y Tailwind CSS',
+    builtWith: 'Hecho con Astro, Preact y Tailwind CSS',
     toTop: 'Volver arriba',
   },
 } as const;

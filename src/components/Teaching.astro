@@ -24,13 +24,13 @@ const { teaching } = dict;
           <div class="flex flex-col gap-1 sm:grid sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-8">
             <div class="order-2 sm:order-1">
               <h3 class="text-body font-semibold">{item.role}</h3>
-              <p class="mt-0.5 text-meta text-ink/70">{item.org}</p>
+              <p class="mt-0.5 text-meta text-text/70">{item.org}</p>
             </div>
-            <p class="nums order-1 text-meta text-ink/60 sm:order-2 sm:text-right">
+            <p class="nums order-1 text-meta text-muted sm:order-2 sm:text-right">
               {item.period}
             </p>
           </div>
-          <p class="mt-4 max-w-[68ch] text-body text-ink/85">{item.description}</p>
+          <p class="mt-4 max-w-[68ch] text-body text-text/85">{item.description}</p>
         </article>
       ))
     }

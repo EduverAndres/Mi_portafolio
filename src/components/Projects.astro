@@ -12,13 +12,14 @@ const { projects } = dict;
 ---
 
 {/*
-  Dos proyectos, dos bloques grandes. Antes había además una tarjeta fantasma
-  de "En construcción" y una nota que decía que la sección estaba incompleta:
-  ambas se eliminaron. Dos casos bien presentados valen más que dos casos y un
-  cartel de obra.
+  Se eliminó la tarjeta fantasma de "En construcción" y la nota que decía que
+  la sección estaba incompleta: un hueco visible pesa más que tener menos
+  proyectos.
 
-  Los bloques alternan el lado de la imagen, así que la ausencia de un tercero
-  no se lee como un hueco en una rejilla de tres columnas.
+  En su lugar queda un bloque reservado y maquetado para el caso de ingeniería
+  de datos. No finge ser un proyecto: se presenta como trabajo en preparación,
+  con su alcance descrito, para que el día que exista el repositorio solo haya
+  que rellenar los datos en src/data/site.ts.
 */}
 <Section id="proyectos" title={projects.title}>
   <div class="border-t border-rule">
@@ -43,18 +44,18 @@ const { projects } = dict;
             />
 
             <div class:list={[imageFirst ? 'lg:order-2' : 'lg:order-1']}>
-              <h3 class="font-display text-2xl font-semibold">{copy.name}</h3>
-              <p class="mt-1 text-meta text-ink/60">{copy.role}</p>
+              <h3 class="font-display text-2xl font-semibold text-text">{copy.name}</h3>
+              <p class="mt-1 text-meta text-muted">{copy.role}</p>
 
-              <p class="mt-5 max-w-[52ch] text-body text-ink/85">{copy.description}</p>
+              <p class="mt-5 max-w-[52ch] text-body text-text/85">{copy.description}</p>
 
-              <p class="mt-5 max-w-[52ch] text-meta text-ink/55">{copy.tags.join(', ')}</p>
+              <p class="mt-5 max-w-[52ch] text-meta text-muted">{copy.tags.join(', ')}</p>
 
               <a
                 href={project.url}
                 target="_blank"
                 rel="noopener"
-                class="mt-7 inline-block text-meta font-semibold text-signal underline decoration-signal/35 underline-offset-6 transition-colors hover:decoration-signal"
+                class="mt-7 inline-block text-meta font-semibold text-amber underline decoration-amber/40 underline-offset-6 transition-colors hover:decoration-amber"
               >
                 {projects.visit}
                 <span class="sr-only"> ({projects.opensNewTab})</span>
@@ -64,5 +65,17 @@ const { projects } = dict;
         );
       })
     }
+
+    {/* Bloque reservado. Borde discontinuo y sin enlace: se lee como una
+        casilla pendiente y honesta, no como un proyecto que no existe. */}
+    <article class="border-b border-rule py-10 lg:py-14">
+      <div class="max-w-[62ch] border border-dashed border-rule-strong px-6 py-8">
+        <p class="text-meta font-semibold text-amber">{projects.reserved.label}</p>
+        <h3 class="font-display mt-2 text-2xl font-semibold text-text">
+          {projects.reserved.name}
+        </h3>
+        <p class="mt-4 text-body text-text/85">{projects.reserved.description}</p>
+      </div>
+    </article>
   </div>
 </Section>

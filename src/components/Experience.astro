@@ -27,7 +27,7 @@ const { experience } = dict;
           <div class="flex flex-col gap-1 sm:grid sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-8">
             <div class="order-2 sm:order-1">
               <h3 class="text-body-l font-semibold">{job.role}</h3>
-              <p class="mt-0.5 text-meta text-ink/70">
+              <p class="mt-0.5 text-meta text-text/70">
                 {job.company}
                 {job.contract && (
                   <>
@@ -38,20 +38,20 @@ const { experience } = dict;
               </p>
             </div>
 
-            <div class="order-1 text-meta text-ink/60 sm:order-2 sm:text-right">
+            <div class="order-1 text-meta text-muted sm:order-2 sm:text-right">
               <p class="nums">{job.period}</p>
               <p class="mt-0.5">{job.location}</p>
             </div>
           </div>
 
-          <ul class="mt-6 max-w-[68ch] list-disc space-y-2.5 pl-5 text-body text-ink/85 marker:text-rule">
+          <ul class="mt-6 max-w-[68ch] list-disc space-y-2.5 pl-5 text-body text-text/85 marker:text-rule-strong">
             {job.bullets.map((bullet) => (
               <li>{bullet}</li>
             ))}
           </ul>
 
-          <p class="mt-6 max-w-[68ch] text-meta text-ink/55">
-            <span class="text-ink/70">{experience.stackLabel}:</span>{' '}
+          <p class="mt-6 max-w-[68ch] text-meta text-muted">
+            <span class="text-text/70">{experience.stackLabel}:</span>{' '}
             {job.stack.join(', ')}
           </p>
         </article>

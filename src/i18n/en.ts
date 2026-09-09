@@ -3,8 +3,7 @@
  * missing here, the build fails.
  *
  * Same rule as the Spanish file: every bullet reads complete WITHOUT the
- * number, so the page never shows a gap. The "MISSING METRIC" comments mark
- * where Eduver should insert the figure once he has it.
+ * number, so the page never shows a gap. Nothing here is invented.
  */
 
 import type { Dict } from './types';
@@ -13,18 +12,20 @@ export const en: Dict = {
   meta: {
     title: 'Eduver Gutiérrez — Data Engineer & Full Stack Developer',
     description:
-      'Data Engineer and Full Stack Developer with 3+ years of experience. ETL/ELT pipelines on Snowflake and AWS, APIs with Python and FastAPI. Based in Barranquilla, Colombia. Available for new opportunities.',
+      'Data Engineer and Full Stack Developer with 3+ years of experience. ETL/ELT pipelines on Snowflake, AWS and Databricks with Python, PySpark and SQL, plus APIs with FastAPI, Spring Boot and Vue.js. Based in Barranquilla, Colombia. Open to remote or relocation.',
     ogAlt: 'Eduver Gutiérrez, Data Engineer and Full Stack Developer',
   },
 
   nav: {
-    perfil: 'About',
     experiencia: 'Experience',
     proyectos: 'Projects',
     habilidades: 'Skills',
+    docencia: 'Teaching',
     educacion: 'Education',
     contacto: 'Contact',
     cv: 'Download CV',
+    github: 'GitHub',
+    linkedin: 'LinkedIn',
     openMenu: 'Open navigation menu',
     closeMenu: 'Close navigation menu',
     skipToContent: 'Skip to content',
@@ -35,27 +36,41 @@ export const en: Dict = {
 
   hero: {
     available: 'Available for new opportunities',
-    roles: ['Data Engineer', 'Full Stack Developer'],
-    value: 'I build ETL/ELT pipelines and APIs that run in production.',
-    evidence: {
-      experience: 'Years of experience',
-      experienceValue: '3+',
-      companies: 'Companies',
-      stack: 'Core stack',
-    },
-    ctaPrimary: 'Download CV',
-    ctaSecondary: 'Get in touch',
-    cvHint: 'PDF, opens in a new tab',
-  },
-
-  about: {
-    title: 'About',
-    body: [
-      'Data engineer and software developer. I work at both ends of a data journey: the infrastructure that moves and cleans it, and the application where someone finally uses it to make a decision.',
-      'I have built ETL/ELT pipelines on Snowflake and AWS, modelled analytical warehouses, and developed APIs and internal applications with Python, FastAPI, Vue.js, Oracle and SQL Server. I also support migrations of legacy systems towards API-based architectures.',
-      'I live in Barranquilla, Colombia, and work remotely with teams in other countries.',
+    availableMode: 'Remote / Relocation',
+    anchor: 'Data Engineer',
+    secondaryRole: 'Full Stack Developer',
+    secondaryStack: 'FastAPI · Spring Boot · Vue.js · Angular',
+    positioning:
+      'I build ETL/ELT pipelines on Snowflake and AWS, and the APIs that put those data to work in production.',
+    metrics: [
+      {
+        // MISSING METRIC: his dates (Jul 2022 → today) add up to over 4 years.
+        value: '3+',
+        label: 'years of experience',
+      },
+      {
+        // TEMPORARY STAND-IN. The hard data metric goes here: pipelines in
+        // production, or volume processed. Until then, an equally verifiable
+        // fact: AWS at TIMIA and ICUBO, Azure at GECELCA.
+        value: '2',
+        label: 'clouds in production, AWS and Azure',
+      },
+      {
+        value: '3',
+        label: 'companies: TIMIA, ICUBO, GECELCA',
+      },
     ],
-    languages: 'Native Spanish. Intermediate conversational English.',
+    ctaPrimary: 'Download CV',
+    ctaSecondary: 'View GitHub',
+    cvHint: 'PDF, opens in a new tab',
+    pipeline: {
+      title: 'A typical pipeline I build, end to end',
+      sources: 'Sources',
+      ingest: 'Ingest',
+      transform: 'Transform',
+      warehouse: 'Warehouse',
+      serve: 'Analytics',
+    },
   },
 
   experience: {
@@ -68,10 +83,9 @@ export const en: Dict = {
         company: 'TIMIA',
         contract: 'Project-based contract, 3 months',
         period: 'Mar — May 2026',
-        year: '2026',
         location: 'Spain',
         bullets: [
-          // MISSING METRIC: number of sources integrated and volume processed.
+          // MISSING METRIC: sources integrated and volume processed.
           'Built ETL/ELT pipelines on Snowflake with Python and PySpark, consolidating heterogeneous sources into a single analytical model.',
           // MISSING METRIC: run frequency or load window duration.
           'Orchestrated loads on AWS with Glue, Lambda and S3, leaving the process automated and resilient to failures.',
@@ -87,18 +101,17 @@ export const en: Dict = {
         company: 'ICUBO Solutions',
         contract: null,
         period: 'Mar 2025 — Feb 2026',
-        year: '2025 — 2026',
         location: 'Barranquilla, Colombia',
         bullets: [
-          // MISSING METRIC: number of models, tables or business areas covered.
+          // MISSING METRIC: models, tables or business areas covered.
           'Modelled the analytical warehouse on Snowflake using star schemas, so business teams could query their own indicators without going through the technical team.',
-          // MISSING METRIC: the most valuable one on the page. Before and after timings.
+          // MISSING METRIC: the most valuable one. Before and after timings.
           'Rewrote the slowest SQL queries and reshaped the data model, cutting response time on business-critical reports.',
-          'Turned business requirements into indicators and dashboards, running requirement-gathering sessions directly with the client.',
+          'Provisioned data infrastructure with Terraform and IAM, keeping access and resources versioned instead of configured by hand.',
           // MISSING METRIC: manual hours removed per month.
           'Automated recurring loads with Python and SQL that were previously run by hand.',
         ],
-        stack: ['Snowflake', 'SQL', 'Python', 'AWS', 'Dimensional modelling'],
+        stack: ['Snowflake', 'SQL', 'Python', 'AWS', 'Terraform', 'IAM'],
       },
       {
         id: 'gecelca',
@@ -106,18 +119,17 @@ export const en: Dict = {
         company: 'GECELCA S.A.S',
         contract: null,
         period: 'Jul 2022 — Dec 2024',
-        year: '2022 — 2024',
         location: 'Barranquilla, Colombia',
         bullets: [
           // MISSING METRIC: how many applications and how many internal users.
           'Developed internal applications with FastAPI and Vue.js on Oracle and SQL Server, used by the company operational teams.',
+          'Built ETL processes with Python and SQL, and worked with Azure Data Factory, Data Lake and Databricks for analytical loads.',
           // MISSING METRIC: how many systems or integrations were migrated.
           'Supported the migration of legacy systems towards REST APIs, replacing integrations coupled directly to the database.',
           // MISSING METRIC: concrete improvement on the slowest reports.
           'Optimised queries and stored procedures on Oracle, targeting the reports that took longest to run.',
-          'Built ETL processes with Python and SQL, and worked with Azure Data Factory, Data Lake and Databricks for analytical loads.',
         ],
-        stack: ['Python', 'FastAPI', 'Vue.js', 'Oracle', 'SQL Server', 'Azure Data Factory', 'Databricks'],
+        stack: ['Python', 'FastAPI', 'Azure Data Factory', 'Databricks', 'Oracle', 'SQL Server', 'Vue.js'],
       },
     ],
   },
@@ -126,13 +138,20 @@ export const en: Dict = {
     title: 'Projects',
     visit: 'View live site',
     opensNewTab: 'opens in a new tab',
+    reserved: {
+      label: 'In preparation',
+      name: 'End-to-end data pipeline',
+      description:
+        'Ingestion from a public API, transformation and load into a warehouse, orchestrated and with a dashboard at the end. Public, documented repository.',
+      note: 'This is the project that carries the most weight for a Data Engineer role. The block is already laid out: as soon as the repository exists, it gets published here.',
+    },
     items: {
       nexus: {
         name: 'NEXUS — Tecnología Inteligente',
         role: 'Founder',
         description:
           'Software development and data science studio I founded. We design custom software, web and mobile applications, analytical dashboards, and generative AI integrations.',
-        tags: ['Web development', 'Data science', 'Generative AI', 'REST APIs', 'Cloud'],
+        tags: ['Web development', 'Data science', 'Generative AI', 'Cloud'],
         imageAlt: 'Home page of the NEXUS Tecnología Inteligente website',
       },
       fincayraiz: {
@@ -140,7 +159,7 @@ export const en: Dict = {
         role: 'Development and architecture',
         description:
           'Real estate marketplace for houses, apartments and country properties, with an AI advisor that interprets what the user needs before recommending listings.',
-        tags: ['Marketplace', 'Generative AI', 'Frontend', 'REST APIs'],
+        tags: ['Marketplace', 'Generative AI', 'REST APIs'],
         imageAlt: 'Property search page of the Finca y Raíz website',
       },
     },
@@ -148,34 +167,44 @@ export const en: Dict = {
 
   skills: {
     title: 'Skills',
-    coreNote: 'What I use daily',
-    moreLabel: 'Show the rest of the stack',
-    lessLabel: 'Hide the rest of the stack',
-    groups: [
+    intro: 'Grouped by what I actually command, not by everything I have ever touched.',
+    levels: [
       {
-        id: 'data',
-        name: 'Data engineering',
-        items: ['ETL / ELT', 'Dimensional modelling', 'Azure Data Factory', 'Azure Data Lake', 'Databricks', 'Dataiku', 'Data quality checks'],
+        id: 'core',
+        name: 'Core',
+        note: 'What I use daily and can defend in a technical interview',
+        items: ['Python', 'SQL', 'Snowflake', 'PySpark', 'AWS · S3, Lambda, Glue', 'FastAPI', 'Databricks'],
       },
       {
-        id: 'backend',
-        name: 'Backend',
-        items: ['Java', 'Spring Boot', 'Node.js', 'Express', 'Django', 'PHP', 'Laravel', 'REST APIs', 'Authentication'],
+        id: 'solid',
+        name: 'Solid',
+        note: 'Real project experience, comfortable with it',
+        items: [
+          'ETL / ELT',
+          'Dimensional modelling',
+          'Vue.js',
+          'Java · Spring Boot',
+          'Oracle',
+          'SQL Server',
+          'Azure Data Factory',
+          'Git',
+        ],
       },
       {
-        id: 'frontend',
-        name: 'Frontend',
-        items: ['React', 'Angular', 'Quasar', 'TypeScript', 'Tailwind CSS'],
-      },
-      {
-        id: 'cloud',
-        name: 'Cloud and databases',
-        items: ['S3', 'Lambda', 'Glue', 'SQL Server', 'Supabase', 'Stored procedures', 'Query optimisation'],
-      },
-      {
-        id: 'ways',
-        name: 'Ways of working',
-        items: ['Git', 'Scrum', 'Kanban', 'Technical documentation'],
+        id: 'familiar',
+        name: 'Familiar',
+        note: 'I have worked with it, would not call it my strength',
+        items: [
+          'Terraform',
+          'Laravel',
+          'Angular',
+          'React',
+          'Node.js',
+          'Django',
+          'Dataiku',
+          'Supabase',
+          'TypeScript',
+        ],
       },
     ],
   },
@@ -236,17 +265,17 @@ export const en: Dict = {
 
   contact: {
     title: 'Contact',
-    intro: 'Available for Data Engineer or Full Stack Developer roles, including remote and international positions.',
+    intro: 'Available for Data Engineer roles: remote, LATAM or Spain.',
     email: 'Email',
     whatsapp: 'WhatsApp',
-    phone: 'Phone',
     linkedin: 'LinkedIn',
+    github: 'GitHub',
     cta: 'Download full résumé',
   },
 
   footer: {
     location: 'Barranquilla, Colombia',
-    builtWith: 'Built with Astro, React and Tailwind CSS',
+    builtWith: 'Built with Astro, Preact and Tailwind CSS',
     toTop: 'Back to top',
   },
 };

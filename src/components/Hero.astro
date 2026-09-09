@@ -1,108 +1,202 @@
 ---
-import { CV_PATH, COMPANIES, HERO_STACK, PERSON } from '../data/site';
-import type { Dict, Lang } from '../i18n';
+import { CV_PATH, CONTACT, HERO_STACK, PERSON } from '../data/site';
+import Icon from './Icon.astro';
+import type { Dict } from '../i18n';
 
 interface Props {
-  lang: Lang;
   dict: Dict;
 }
 
 const { dict } = Astro.props;
 const { hero } = dict;
+
+/** Los cinco pasos del diagrama animado, de arriba abajo. */
+const pipelineSteps = [
+  hero.pipeline.sources,
+  hero.pipeline.ingest,
+  hero.pipeline.transform,
+  hero.pipeline.warehouse,
+  hero.pipeline.serve,
+];
+
+const NODE_X = 22;
+const FIRST_Y = 34;
+const STEP_Y = 92;
 ---
 
 {/*
-  La placa. Único bloque oscuro del sitio y único lugar donde se gasta audacia.
-  Todo su contenido es HTML estático: se ve completo en el primer frame, sin
-  esperar a JavaScript. Orden deliberado: disponibilidad, nombre, rol, valor,
-  PRUEBA y acciones — la evidencia va antes que los botones porque un reclutador
-  decide contactar después de verla.
+  El héroe cabe entero en 1366x768 sin scroll. Todo su contenido es HTML
+  estático: se ve en el primer paint aunque el JavaScript no llegue nunca.
+
+  El ancla ("Data Engineer") y la frase de posicionamiento NO se animan a
+  propósito. Ocultarlas 300 ms para lucir una transición sería tirar por la
+  borda justo lo que tiene que leerse primero.
 */}
-<section class="on-ink bg-ink text-ink-fg" aria-labelledby="hero-name">
-  <div class="mx-auto max-w-6xl px-5 pt-24 pb-12 sm:px-8 sm:pt-36 sm:pb-20">
-    <p class="flex items-center gap-2.5 text-meta text-ink-fg">
-      <span
-        class="inline-block h-2 w-2 shrink-0 rounded-full bg-live ring-3 ring-live/25"
-        aria-hidden="true"
-      ></span>
-      {hero.available}
-    </p>
+<section
+  class="amber-halo relative isolate flex min-h-svh items-center overflow-hidden border-b border-rule"
+  aria-labelledby="hero-anchor"
+>
+  {/* La rejilla vive en su propia capa: si la máscara se aplicara a la
+      sección, se llevaría por delante el texto que hay encima. */}
+  <div class="grid-field pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
 
-    <h1
-      id="hero-name"
-      class="font-display mt-5 text-display-xl font-bold text-balance sm:mt-6"
-    >
-      {PERSON.firstName}<br />{PERSON.lastName}
-    </h1>
+  <div
+    class="mx-auto grid w-full max-w-6xl gap-10 px-5 pt-24 pb-12 sm:px-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:gap-16"
+  >
+    <div>
+      {/* Disponibilidad: lo primero que un reclutador necesita saber. */}
+      <p class="rise flex flex-wrap items-center gap-x-2.5 gap-y-1 text-meta" style="--rise-index: 0">
+        <span class="live-dot inline-block h-2 w-2 shrink-0 rounded-full bg-live" aria-hidden="true"></span>
+        <span class="text-text">{hero.available}</span>
+        <span class="text-muted">{hero.availableMode}</span>
+      </p>
 
-    {/* Los dos roles, en los términos que un ATS busca literalmente.
-        Separados por la rejilla, no por un punto medio. */}
-    <p class="mt-5 flex flex-col text-body-l font-medium sm:mt-6 sm:flex-row sm:items-center">
-      <span>{hero.roles[0]}</span>
-      <span
-        class="mt-1 sm:mt-0 sm:ml-5 sm:border-l sm:border-ink-rule sm:pl-5"
-      >{hero.roles[1]}</span>
-    </p>
+      <p class="rise mt-7 text-body-l font-medium text-muted" style="--rise-index: 1">
+        {PERSON.name}
+      </p>
 
-    <p class="mt-4 max-w-[42ch] text-body-l text-pretty text-ink-fg/85 sm:mt-5">
-      {hero.value}
-    </p>
+      {/* El ancla. Sin animación: es el elemento que define el LCP. */}
+      <h1 id="hero-anchor" class="font-display mt-1 text-anchor font-bold text-text">
+        {hero.anchor}
+      </h1>
 
-    {/* Franja de evidencia: años, empresas y stack compuestos como una fila de
-        datos. Es lo que carga la prueba, y lo único que se anima al cargar. */}
-    <dl
-      class="mt-8 grid grid-cols-2 border-t border-ink-rule sm:mt-12 sm:grid-cols-[auto_1fr_1.4fr]"
-    >
-      <div
-        class="evidence-cell border-b border-ink-rule py-4 pr-5 sm:border-b-0 sm:py-5 sm:pr-10"
-        style="--cell-index: 0"
-      >
-        <dd class="font-display nums text-4xl font-bold sm:text-5xl">
-          {hero.evidence.experienceValue}
-        </dd>
-        <dt class="mt-1 text-meta text-ink-muted">{hero.evidence.experience}</dt>
+      {/* Refuerzo full stack: subordinado al ancla, pero con tecnologías
+          concretas para que el perfil doble se lea de verdad. */}
+      <p class="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <span class="text-display-l font-semibold text-amber">{hero.secondaryRole}</span>
+        <span class="text-meta text-muted">{hero.secondaryStack}</span>
+      </p>
+
+      <p class="mt-6 max-w-[54ch] text-body-l text-text/85">
+        {hero.positioning}
+      </p>
+
+      {/* Tres métricas, no cuatro genéricas. */}
+      <dl class="mt-8 grid max-w-lg grid-cols-3 gap-4 border-y border-rule py-5">
+        {
+          hero.metrics.map((metric, index) => (
+            <div class="rise" style={`--rise-index: ${index + 2}`}>
+              <dd class="font-display nums text-3xl font-bold text-amber sm:text-4xl">
+                {metric.value}
+              </dd>
+              <dt class="mt-1 text-meta text-balance text-muted">{metric.label}</dt>
+            </div>
+          ))
+        }
+      </dl>
+
+      {/* Seis tecnologías, las que más pesan en una oferta de Data Engineer. */}
+      <ul class="rise mt-6 flex flex-wrap gap-2" style="--rise-index: 5">
+        {
+          HERO_STACK.map((tech) => (
+            <li class="rounded-pill border border-rule-strong bg-surface px-3 py-1.5 text-meta text-text/90">
+              {tech}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="rise mt-8 flex flex-wrap items-center gap-4" style="--rise-index: 6">
+        <a
+          href={CV_PATH}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center rounded-xs bg-amber px-6 py-3 text-meta font-semibold text-bg transition-opacity hover:opacity-90"
+        >
+          {hero.ctaPrimary}
+          <span class="sr-only"> ({hero.cvHint})</span>
+        </a>
+
+        <a
+          href={CONTACT.github}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 rounded-xs border border-rule-strong px-5 py-3 text-meta font-semibold text-text transition-colors hover:border-amber hover:text-amber"
+        >
+          <Icon name="github" size={17} />
+          {hero.ctaSecondary}
+        </a>
       </div>
-
-      <div
-        class="evidence-cell border-b border-l border-ink-rule py-4 pl-5 sm:border-b-0 sm:py-5 sm:px-10"
-        style="--cell-index: 1"
-      >
-        <dd class="flex flex-wrap items-baseline gap-x-5 gap-y-1 text-body-l font-semibold">
-          {COMPANIES.map((company) => <span>{company}</span>)}
-        </dd>
-        <dt class="mt-2 text-meta text-ink-muted">{hero.evidence.companies}</dt>
-      </div>
-
-      <div
-        class="evidence-cell col-span-2 py-4 sm:col-span-1 sm:border-l sm:border-ink-rule sm:py-5 sm:pl-10"
-        style="--cell-index: 2"
-      >
-        <dd class="flex flex-wrap gap-x-4 gap-y-1 text-body text-ink-fg/90">
-          {HERO_STACK.map((tech) => <span>{tech}</span>)}
-        </dd>
-        <dt class="mt-2 text-meta text-ink-muted">{hero.evidence.stack}</dt>
-      </div>
-    </dl>
-
-    {/* Dos acciones que no se parecen: una placa sólida clara y un enlace de
-        texto. Sin flechas pegadas al rótulo. */}
-    <div class="mt-8 flex flex-col items-start gap-5 sm:mt-11 sm:flex-row sm:items-center sm:gap-8">
-      <a
-        href={CV_PATH}
-        target="_blank"
-        rel="noopener"
-        class="inline-flex items-center rounded-xs bg-paper px-6 py-3.5 text-meta font-semibold text-ink transition-colors hover:bg-white"
-      >
-        {hero.ctaPrimary}
-        <span class="sr-only"> ({hero.cvHint})</span>
-      </a>
-
-      <a
-        href="#contacto"
-        class="text-meta font-medium text-ink-fg underline decoration-ink-muted underline-offset-6 transition-colors hover:decoration-ink-fg"
-      >
-        {hero.ctaSecondary}
-      </a>
     </div>
+
+    {/*
+      El efecto principal del sitio. En vez de partículas decorativas, dibuja
+      el recorrido de un dato: fuentes, ingesta, transformación, almacén y
+      analítica. El trazo siempre está pintado; lo que se mueve es un segmento
+      corto que lo recorre, en CSS puro y sin JavaScript.
+    */}
+    <figure class="hidden lg:block" aria-labelledby="pipeline-title">
+      <figcaption id="pipeline-title" class="sr-only">{hero.pipeline.title}</figcaption>
+      <svg
+        width="300"
+        height="430"
+        viewBox="0 0 300 430"
+        fill="none"
+        role="img"
+        aria-hidden="true"
+        class="text-amber"
+      >
+        {
+          pipelineSteps.slice(0, -1).map((_, index) => (
+            <line
+              x1={NODE_X}
+              y1={FIRST_Y + index * STEP_Y + 10}
+              x2={NODE_X}
+              y2={FIRST_Y + (index + 1) * STEP_Y - 10}
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-opacity="0.25"
+            />
+          ))
+        }
+
+        {
+          pipelineSteps.slice(0, -1).map((_, index) => (
+            <line
+              class="flow-line"
+              style={`--flow-delay: ${index * 0.42}s`}
+              x1={NODE_X}
+              y1={FIRST_Y + index * STEP_Y + 10}
+              x2={NODE_X}
+              y2={FIRST_Y + (index + 1) * STEP_Y - 10}
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+            />
+          ))
+        }
+
+        {
+          pipelineSteps.map((step, index) => (
+            <>
+              <circle
+                cx={NODE_X}
+                cy={FIRST_Y + index * STEP_Y}
+                r="9"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-opacity="0.35"
+              />
+              <circle
+                class="node-pulse"
+                style={`--flow-delay: ${index * 0.42}s`}
+                cx={NODE_X}
+                cy={FIRST_Y + index * STEP_Y}
+                r="4"
+                fill="currentColor"
+              />
+              <text
+                x={NODE_X + 26}
+                y={FIRST_Y + index * STEP_Y + 5}
+                class="fill-muted text-[13px]"
+                style="font-family: var(--font-sans)"
+              >
+                {step}
+              </text>
+            </>
+          ))
+        }
+      </svg>
+    </figure>
   </div>
 </section>

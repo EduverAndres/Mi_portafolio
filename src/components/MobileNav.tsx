@@ -13,8 +13,10 @@ interface Props {
     close: string;
     cv: string;
     cvHint: string;
+    github: string;
   };
   cvPath: string;
+  githubUrl: string;
 }
 
 /**
@@ -22,7 +24,7 @@ interface Props {
  * piezas del sitio que necesita estado. Se hidrata con `client:idle`, así que
  * no compite con el primer render del héroe.
  */
-export default function MobileNav({ links, labels, cvPath }: Props) {
+export default function MobileNav({ links, labels, cvPath, githubUrl }: Props) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -66,7 +68,7 @@ export default function MobileNav({ links, labels, cvPath }: Props) {
         aria-expanded={open}
         aria-controls="mobile-nav-panel"
         aria-label={open ? labels.close : labels.open}
-        className="grid h-10 w-10 place-items-center text-ink-fg"
+        className="grid h-10 w-10 place-items-center text-text"
       >
         {open ? <CloseIcon /> : <MenuIcon />}
       </button>
@@ -76,7 +78,7 @@ export default function MobileNav({ links, labels, cvPath }: Props) {
           id="mobile-nav-panel"
           ref={panelRef}
           tabIndex={-1}
-          className="on-ink fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-ink-rule bg-ink px-5 py-8 text-ink-fg outline-none sm:px-8"
+          className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-rule bg-surface px-5 py-8 text-text outline-none sm:px-8"
         >
           <nav aria-label={labels.open}>
             <ul className="flex flex-col gap-1">
@@ -85,7 +87,7 @@ export default function MobileNav({ links, labels, cvPath }: Props) {
                   <a
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="block border-b border-ink-rule py-4 text-body-l text-ink-fg"
+                    className="block border-b border-rule py-4 text-body-l text-text"
                   >
                     {link.label}
                   </a>
@@ -94,16 +96,28 @@ export default function MobileNav({ links, labels, cvPath }: Props) {
             </ul>
           </nav>
 
-          <a
-            href={cvPath}
-            target="_blank"
-            rel="noopener"
-            onClick={() => setOpen(false)}
-            className="mt-8 inline-flex rounded-xs bg-paper px-5 py-3 text-meta font-semibold text-ink"
-          >
-            {labels.cv}
-            <span className="sr-only"> ({labels.cvHint})</span>
-          </a>
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <a
+              href={cvPath}
+              target="_blank"
+              rel="noopener"
+              onClick={() => setOpen(false)}
+              className="inline-flex rounded-xs bg-amber px-5 py-3 text-meta font-semibold text-bg"
+            >
+              {labels.cv}
+              <span className="sr-only"> ({labels.cvHint})</span>
+            </a>
+
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener"
+              onClick={() => setOpen(false)}
+              className="inline-flex rounded-xs border border-rule-strong px-5 py-3 text-meta font-semibold text-text"
+            >
+              {labels.github}
+            </a>
+          </div>
         </div>
       )}
     </div>

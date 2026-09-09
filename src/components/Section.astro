@@ -17,7 +17,7 @@ const { id, title, intro } = Astro.props;
 <section id={id} class="scroll-mt-16 border-t border-rule py-16 sm:py-24">
   <div class="mx-auto max-w-6xl px-5 sm:px-8">
     <h2 class="font-display text-display-l font-semibold">{title}</h2>
-    {intro && <p class="mt-4 max-w-[60ch] text-body-l text-ink/75">{intro}</p>}
+    {intro && <p class="mt-4 max-w-[60ch] text-body-l text-text/75">{intro}</p>}
 
     <div class="mt-10 sm:mt-12">
       <slot />

@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { LANGUAGES, otherLang, type Dict, type Lang } from '../i18n';
-import { PERSON, CONTACT, SITE_URL, CORE_SKILLS } from '../data/site';
+import { PERSON, CONTACT, SITE_URL, HERO_STACK } from '../data/site';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -35,7 +35,17 @@ const personSchema = {
     addressCountry: PERSON.countryCode,
   },
   sameAs: [CONTACT.linkedin, CONTACT.github],
-  knowsAbout: [...CORE_SKILLS, 'ETL', 'Data Engineering', 'REST APIs'],
+  knowsAbout: [
+    ...HERO_STACK,
+    'ETL',
+    'ELT',
+    'Data Engineering',
+    'Data Warehousing',
+    'FastAPI',
+    'Spring Boot',
+    'Vue.js',
+    'REST APIs',
+  ],
   knowsLanguage: [
     { '@type': 'Language', name: 'Spanish', alternateName: 'es' },
     { '@type': 'Language', name: 'English', alternateName: 'en' },
@@ -101,7 +111,7 @@ const personSchema = {
   <body>
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:bg-ink focus:px-4 focus:py-2 focus:text-meta focus:font-medium focus:text-ink-fg"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:bg-surface focus:px-4 focus:py-2 focus:text-meta focus:font-medium focus:text-text"
     >
       {dict.nav.skipToContent}
     </a>

@@ -1,14 +1,11 @@
 ---
 import Hero from './Hero.astro';
-import About from './About.astro';
 import Experience from './Experience.astro';
 import Projects from './Projects.astro';
-import Section from './Section.astro';
-import Skills from './Skills';
+import Skills from './Skills.astro';
 import Teaching from './Teaching.astro';
 import Education from './Education.astro';
 import Contact from './Contact.astro';
-import { CORE_SKILLS } from '../data/site';
 import type { Dict, Lang } from '../i18n';
 
 interface Props {
@@ -16,30 +13,20 @@ interface Props {
   dict: Dict;
 }
 
-const { lang, dict } = Astro.props;
+const { dict } = Astro.props;
 ---
 
-<Hero lang={lang} dict={dict} />
-<About dict={dict} />
+{/*
+  Orden de secciones. Desaparece el antiguo bloque "Perfil": su contenido era
+  la frase de posicionamiento del héroe, y repetirlo debajo solo diluía.
+
+  Docencia baja después de Proyectos y Habilidades: suma como diferenciador,
+  pero no puede competir con el material técnico en la parte alta.
+*/}
+<Hero dict={dict} />
 <Experience dict={dict} />
 <Projects dict={dict} />
-
-<Section id="habilidades" title={dict.skills.title}>
-  {/* `client:visible` hidrata solo cuando la sección entra en pantalla. El
-      núcleo de ocho tecnologías ya viene renderizado en el HTML del build:
-      se lee aunque el JavaScript nunca llegue a ejecutarse. */}
-  <Skills
-    client:visible
-    core={CORE_SKILLS}
-    groups={dict.skills.groups}
-    labels={{
-      coreNote: dict.skills.coreNote,
-      more: dict.skills.moreLabel,
-      less: dict.skills.lessLabel,
-    }}
-  />
-</Section>
-
+<Skills dict={dict} />
 <Teaching dict={dict} />
 <Education dict={dict} />
 <Contact dict={dict} />

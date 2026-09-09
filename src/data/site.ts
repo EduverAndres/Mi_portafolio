@@ -17,37 +17,43 @@ export const PERSON = {
 
 export const CONTACT = {
   email: 'eduverjimenez07@gmail.com',
+  // Fuera del sitio a propósito: se muestra solo WhatsApp.
   phone: '+573332369167',
-  phoneLabel: '+57 333 236 9167',
   whatsapp: '573024345803',
   whatsappLabel: '+57 302 434 5803',
   linkedin: 'https://www.linkedin.com/in/eduver-gutierrez-437408386',
   linkedinLabel: 'eduver-gutierrez',
   github: 'https://github.com/EduverAndres',
+  githubLabel: 'EduverAndres',
 } as const;
 
-export const CV_PATH = '/Eduver_cv_2026.pdf';
+// El reclutador lo descarga y luego lo busca por nombre de archivo entre
+// decenas de PDF: el nombre tiene que decir quién es y para qué rol.
+export const CV_PATH = '/Eduver_Gutierrez_Data_Engineer_CV.pdf';
 
 /** Empresas que aparecen como prueba en la franja del héroe. Orden: más reciente primero. */
 export const COMPANIES = ['TIMIA', 'ICUBO', 'GECELCA'] as const;
 
-/** Stack corto del héroe: lo que un reclutador escanea en los primeros segundos. */
-export const HERO_STACK = ['Python', 'FastAPI', 'PySpark', 'Snowflake', 'AWS', 'SQL'] as const;
+/**
+ * Seis tecnologías, ni una más: las que más aparecen en ofertas de Data
+ * Engineer y que Eduver usa de verdad. Databricks entra confirmado por él;
+ * Airflow y dbt quedan fuera a propósito porque no los ha usado.
+ */
+export const HERO_STACK = [
+  'Snowflake',
+  'Python',
+  'PySpark',
+  'SQL',
+  'AWS',
+  'Databricks',
+] as const;
 
 /**
- * Núcleo de habilidades con presencia visual real (8).
- * El resto del stack va agrupado y colapsado — un reclutador escanea 8, no 50.
+ * Habilidades por nivel real de dominio, no por área. Un stack infinito hace
+ * ver generalista; esto dice en qué confiar y en qué no.
  */
-export const CORE_SKILLS = [
-  'Python',
-  'SQL',
-  'PySpark',
-  'Snowflake',
-  'AWS',
-  'FastAPI',
-  'Oracle',
-  'Vue.js',
-] as const;
+export const SKILL_LEVELS = ['core', 'solid', 'familiar'] as const;
+export type SkillLevel = (typeof SKILL_LEVELS)[number];
 
 export const PROJECTS = [
   {
