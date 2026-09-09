@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import Portfolio from '../components/Portfolio.astro';
+import { getDict } from '../i18n';
+
+const lang = 'es' as const;
+const dict = getDict(lang);
+---
+
+<Base lang={lang} dict={dict}>
+  <Portfolio lang={lang} dict={dict} />
+</Base>

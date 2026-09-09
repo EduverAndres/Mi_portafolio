@@ -1,0 +1,87 @@
+---
+import Section from './Section.astro';
+import Icon from './Icon.astro';
+import { CONTACT, CV_PATH } from '../data/site';
+import type { Dict } from '../i18n';
+
+interface Props {
+  dict: Dict;
+}
+
+const { dict } = Astro.props;
+const { contact, hero } = dict;
+
+const channels = [
+  {
+    icon: 'mail' as const,
+    label: contact.email,
+    value: CONTACT.email,
+    href: `mailto:${CONTACT.email}`,
+    external: false,
+  },
+  {
+    icon: 'message-circle' as const,
+    label: contact.whatsapp,
+    value: CONTACT.whatsappLabel,
+    href: `https://wa.me/${CONTACT.whatsapp}`,
+    external: true,
+  },
+  {
+    icon: 'phone' as const,
+    label: contact.phone,
+    value: CONTACT.phoneLabel,
+    href: `tel:${CONTACT.phone}`,
+    external: false,
+  },
+  {
+    icon: 'linkedin' as const,
+    label: contact.linkedin,
+    value: CONTACT.linkedinLabel,
+    href: CONTACT.linkedin,
+    external: true,
+  },
+];
+---
+
+{/*
+  Los emojis ✉️ 💬 📞 se sustituyen por iconos de trazo (ver Icon.astro), que
+  se escriben como SVG dentro del HTML: sin JavaScript y sin petición extra.
+
+  Cada canal es una fila completa y pulsable, no una tarjeta centrada: se
+  escanea de un vistazo y funciona igual de bien a 360 px.
+*/}
+<Section id="contacto" title={contact.title} intro={contact.intro}>
+  <ul class="max-w-[70ch] border-t border-rule">
+    {
+      channels.map((channel) => (
+        <li>
+          <a
+            href={channel.href}
+            target={channel.external ? '_blank' : undefined}
+            rel={channel.external ? 'noopener' : undefined}
+            class="group flex items-center gap-4 border-b border-rule py-5 transition-colors hover:text-signal"
+          >
+            <Icon
+              name={channel.icon}
+              class="shrink-0 text-ink/45 transition-colors group-hover:text-signal"
+            />
+            <span class="text-body font-medium">{channel.label}</span>
+            <span class="ml-auto text-right text-meta text-ink/65 transition-colors group-hover:text-signal">
+              {channel.value}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <a
+    href={CV_PATH}
+    target="_blank"
+    rel="noopener"
+    class="mt-10 inline-flex rounded-xs bg-ink px-6 py-3.5 text-meta font-semibold text-ink-fg transition-opacity hover:opacity-90"
+  >
+    {contact.cta}
+    <span class="sr-only"> ({hero.cvHint})</span>
+  </a>
+</Section>

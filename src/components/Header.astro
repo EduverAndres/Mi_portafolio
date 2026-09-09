@@ -1,0 +1,92 @@
+---
+import { CV_PATH, PERSON } from '../data/site';
+import { localizePath, otherLang, LANGUAGES, type Dict, type Lang } from '../i18n';
+import MobileNav from './MobileNav';
+
+interface Props {
+  lang: Lang;
+  dict: Dict;
+}
+
+const { lang, dict } = Astro.props;
+const home = localizePath('/', lang);
+
+const links = [
+  { href: '#perfil', label: dict.nav.perfil },
+  { href: '#experiencia', label: dict.nav.experiencia },
+  { href: '#proyectos', label: dict.nav.proyectos },
+  { href: '#habilidades', label: dict.nav.habilidades },
+  { href: '#educacion', label: dict.nav.educacion },
+  { href: '#contacto', label: dict.nav.contacto },
+];
+
+const target = otherLang(lang);
+const targetPath = localizePath('/', target);
+---
+
+<header
+  class="fixed top-0 right-0 left-0 z-50 border-b border-rule bg-paper/90 backdrop-blur-sm"
+>
+  <div class="mx-auto flex h-16 max-w-6xl items-center gap-4 px-5 sm:px-8">
+    <a
+      href={home}
+      class="font-display text-lg font-bold tracking-tight"
+      aria-label={PERSON.name}
+    >
+      {PERSON.initials}
+    </a>
+
+    <nav class="ml-auto hidden lg:block" aria-label={dict.nav.perfil}>
+      <ul class="flex items-center gap-7">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-meta text-ink/75 transition-colors hover:text-ink"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    {/* Cambiar de idioma es navegar a otra URL: un enlace basta.
+        Nada que hidratar, y funciona sin JavaScript. */}
+    <a
+      href={targetPath}
+      hreflang={LANGUAGES[target].htmlLang}
+      rel="alternate"
+      class="ml-auto text-meta font-medium text-ink underline decoration-rule underline-offset-4 transition-colors hover:decoration-ink lg:ml-0"
+      aria-label={dict.nav.langLabel}
+    >
+      {dict.nav.switchTo}
+    </a>
+
+    <a
+      href={CV_PATH}
+      target="_blank"
+      rel="noopener"
+      class="hidden rounded-xs bg-ink px-4 py-2 text-meta font-semibold text-ink-fg transition-opacity hover:opacity-90 sm:inline-flex"
+    >
+      {dict.nav.cv}
+      <span class="sr-only"> ({dict.hero.cvHint})</span>
+    </a>
+
+    {/* Solo se le pasan las cadenas que usa: las props de una isla viajan
+        serializadas en el HTML, y el diccionario completo lo inflaría. */}
+    <MobileNav
+      client:idle
+      links={links}
+      cvPath={CV_PATH}
+      labels={{
+        open: dict.nav.openMenu,
+        close: dict.nav.closeMenu,
+        cv: dict.nav.cv,
+        cvHint: dict.hero.cvHint,
+      }}
+    />
+  </div>
+</header>

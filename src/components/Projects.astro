@@ -1,0 +1,68 @@
+---
+import Section from './Section.astro';
+import { PROJECTS } from '../data/site';
+import type { Dict } from '../i18n';
+
+interface Props {
+  dict: Dict;
+}
+
+const { dict } = Astro.props;
+const { projects } = dict;
+---
+
+{/*
+  Dos proyectos, dos bloques grandes. Antes había además una tarjeta fantasma
+  de "En construcción" y una nota que decía que la sección estaba incompleta:
+  ambas se eliminaron. Dos casos bien presentados valen más que dos casos y un
+  cartel de obra.
+
+  Los bloques alternan el lado de la imagen, así que la ausencia de un tercero
+  no se lee como un hueco en una rejilla de tres columnas.
+*/}
+<Section id="proyectos" title={projects.title}>
+  <div class="border-t border-rule">
+    {
+      PROJECTS.map((project, index) => {
+        const copy = projects.items[project.id as keyof typeof projects.items];
+        const imageFirst = index % 2 === 0;
+
+        return (
+          <article class="grid items-center gap-8 border-b border-rule py-10 lg:grid-cols-2 lg:gap-14 lg:py-14">
+            <img
+              src={project.image}
+              alt={copy.imageAlt}
+              width={project.width}
+              height={project.height}
+              loading="lazy"
+              decoding="async"
+              class:list={[
+                'w-full border border-rule bg-surface',
+                imageFirst ? 'lg:order-1' : 'lg:order-2',
+              ]}
+            />
+
+            <div class:list={[imageFirst ? 'lg:order-2' : 'lg:order-1']}>
+              <h3 class="font-display text-2xl font-semibold">{copy.name}</h3>
+              <p class="mt-1 text-meta text-ink/60">{copy.role}</p>
+
+              <p class="mt-5 max-w-[52ch] text-body text-ink/85">{copy.description}</p>
+
+              <p class="mt-5 max-w-[52ch] text-meta text-ink/55">{copy.tags.join(', ')}</p>
+
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener"
+                class="mt-7 inline-block text-meta font-semibold text-signal underline decoration-signal/35 underline-offset-6 transition-colors hover:decoration-signal"
+              >
+                {projects.visit}
+                <span class="sr-only"> ({projects.opensNewTab})</span>
+              </a>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+</Section>

@@ -1,0 +1,117 @@
+---
+import '../styles/global.css';
+import { LANGUAGES, otherLang, type Dict, type Lang } from '../i18n';
+import { PERSON, CONTACT, SITE_URL, CORE_SKILLS } from '../data/site';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  lang: Lang;
+  dict: Dict;
+}
+
+const { lang, dict } = Astro.props;
+
+const canonical = new URL(lang === 'es' ? '/' : '/en', SITE_URL).href;
+const ogImage = new URL('/og.png', SITE_URL).href;
+
+/** Datos estructurados: ayudan a que un buscador entienda que esto es una
+ *  persona con un cargo, no una empresa ni un blog. */
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: PERSON.name,
+  givenName: PERSON.firstName,
+  familyName: PERSON.lastName,
+  jobTitle: ['Data Engineer', 'Full Stack Developer'],
+  description: dict.meta.description,
+  url: SITE_URL,
+  image: ogImage,
+  email: `mailto:${CONTACT.email}`,
+  telephone: CONTACT.phone,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: PERSON.city,
+    addressCountry: PERSON.countryCode,
+  },
+  sameAs: [CONTACT.linkedin, CONTACT.github],
+  knowsAbout: [...CORE_SKILLS, 'ETL', 'Data Engineering', 'REST APIs'],
+  knowsLanguage: [
+    { '@type': 'Language', name: 'Spanish', alternateName: 'es' },
+    { '@type': 'Language', name: 'English', alternateName: 'en' },
+  ],
+  alumniOf: dict.education.formal.map((item) => ({
+    '@type': 'EducationalOrganization',
+    name: item.school,
+  })),
+  worksFor: dict.experience.items.map((item) => ({
+    '@type': 'Organization',
+    name: item.company,
+  })),
+};
+---
+
+<!doctype html>
+<html lang={LANGUAGES[lang].htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{dict.meta.title}</title>
+    <meta name="description" content={dict.meta.description} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#14212e" />
+
+    <link rel="alternate" hreflang="es" href={new URL('/', SITE_URL).href} />
+    <link rel="alternate" hreflang="en" href={new URL('/en', SITE_URL).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL('/', SITE_URL).href} />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content={PERSON.name} />
+    <meta property="og:title" content={dict.meta.title} />
+    <meta property="og:description" content={dict.meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={dict.meta.ogAlt} />
+    <meta property="og:locale" content={LANGUAGES[lang].ogLocale} />
+    <meta property="og:locale:alternate" content={LANGUAGES[otherLang(lang)].ogLocale} />
+    <meta property="profile:first_name" content={PERSON.firstName} />
+    <meta property="profile:last_name" content={PERSON.lastName} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={dict.meta.title} />
+    <meta name="twitter:description" content={dict.meta.description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={dict.meta.ogAlt} />
+
+    <meta name="author" content={PERSON.name} />
+    <meta name="robots" content="index, follow" />
+
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(personSchema)}
+    />
+  </head>
+
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-100 focus:bg-ink focus:px-4 focus:py-2 focus:text-meta focus:font-medium focus:text-ink-fg"
+    >
+      {dict.nav.skipToContent}
+    </a>
+
+    <Header lang={lang} dict={dict} />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer lang={lang} dict={dict} />
+  </body>
+</html>

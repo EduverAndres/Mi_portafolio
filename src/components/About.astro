@@ -1,0 +1,30 @@
+---
+import Section from './Section.astro';
+import type { Dict } from '../i18n';
+
+interface Props {
+  dict: Dict;
+}
+
+const { dict } = Astro.props;
+const { about } = dict;
+---
+
+{/*
+  Aquí vivían cuatro contadores animados que arrancaban en 0 ("0+ años de
+  experiencia"). Se eliminaron en lugar de arreglarse: los años y las empresas
+  ya están en la franja del héroe, con más peso y sin esperar a que un
+  observador de scroll decida animarlos. Los idiomas quedan al pie de este
+  bloque, y el propio conmutador ES/EN es la prueba.
+*/}
+<Section id="perfil" title={about.title}>
+  <div class="grid gap-10 lg:grid-cols-[minmax(0,60ch)_auto] lg:gap-16">
+    <div class="space-y-5 text-body-l text-ink/85">
+      {about.body.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+
+    <p class="text-meta text-ink/60 lg:max-w-[24ch]">
+      {about.languages}
+    </p>
+  </div>
+</Section>

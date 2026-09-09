@@ -1,0 +1,52 @@
+---
+import Section from './Section.astro';
+import type { Dict } from '../i18n';
+
+interface Props {
+  dict: Dict;
+}
+
+const { dict } = Astro.props;
+const { education } = dict;
+---
+
+{/*
+  Los emojis 🎓 y 📜 que encabezaban cada entrada desaparecen: la jerarquía la
+  dan el peso tipográfico y la regla, no un icono decorativo repetido.
+*/}
+<Section id="educacion" title={education.title}>
+  <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+    <div>
+      <h3 class="text-meta font-semibold text-ink/70">{education.formalTitle}</h3>
+      <ul class="mt-5 border-t border-rule">
+        {
+          education.formal.map((item) => (
+            <li class="border-b border-rule py-5">
+              <p class="text-body font-semibold">
+                {item.degree}
+                {item.note && (
+                  <span class="font-normal text-ink/55"> — {item.note}</span>
+                )}
+              </p>
+              <p class="mt-0.5 text-meta text-ink/60">{item.school}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-meta font-semibold text-ink/70">{education.coursesTitle}</h3>
+      <ul class="mt-5 border-t border-rule">
+        {
+          education.courses.map((course) => (
+            <li class="border-b border-rule py-5">
+              <p class="text-body font-semibold">{course.name}</p>
+              <p class="mt-0.5 text-meta text-ink/60">{course.org}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</Section>

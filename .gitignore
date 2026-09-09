@@ -1,2 +1,13 @@
+# build
+dist/
+.astro/
+
+# dependencias
+node_modules/
+
+# entorno y despliegue
 .vercel
 .env*
+
+# generado en cada build (scripts/make-og.mjs)
+public/og.png

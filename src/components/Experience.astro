@@ -1,0 +1,61 @@
+---
+import Section from './Section.astro';
+import type { Dict } from '../i18n';
+
+interface Props {
+  dict: Dict;
+}
+
+const { dict } = Astro.props;
+const { experience } = dict;
+---
+
+{/*
+  Filas de registro, no tarjetas: rótulo a la izquierda, metadatos alineados a
+  la derecha sobre la misma línea base, y una regla de 1px entre entradas.
+  Sin sombras ni hover que levante nada.
+
+  Los bullets llevan huecos de métrica marcados con "FALTA MÉTRICA" en
+  src/i18n/es.ts y "MISSING METRIC" en en.ts. Cada frase se lee completa sin la
+  cifra, para que el sitio nunca muestre un vacío mientras Eduver los completa.
+*/}
+<Section id="experiencia" title={experience.title}>
+  <div class="border-t border-rule">
+    {
+      experience.items.map((job) => (
+        <article class="border-b border-rule py-9 sm:py-11">
+          <div class="flex flex-col gap-1 sm:grid sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-8">
+            <div class="order-2 sm:order-1">
+              <h3 class="text-body-l font-semibold">{job.role}</h3>
+              <p class="mt-0.5 text-meta text-ink/70">
+                {job.company}
+                {job.contract && (
+                  <>
+                    {' — '}
+                    {job.contract}
+                  </>
+                )}
+              </p>
+            </div>
+
+            <div class="order-1 text-meta text-ink/60 sm:order-2 sm:text-right">
+              <p class="nums">{job.period}</p>
+              <p class="mt-0.5">{job.location}</p>
+            </div>
+          </div>
+
+          <ul class="mt-6 max-w-[68ch] list-disc space-y-2.5 pl-5 text-body text-ink/85 marker:text-rule">
+            {job.bullets.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+
+          <p class="mt-6 max-w-[68ch] text-meta text-ink/55">
+            <span class="text-ink/70">{experience.stackLabel}:</span>{' '}
+            {job.stack.join(', ')}
+          </p>
+        </article>
+      ))
+    }
+  </div>
+</Section>

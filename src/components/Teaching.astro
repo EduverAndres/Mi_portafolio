@@ -1,0 +1,38 @@
+---
+import Section from './Section.astro';
+import type { Dict } from '../i18n';
+
+interface Props {
+  dict: Dict;
+}
+
+const { dict } = Astro.props;
+const { teaching } = dict;
+---
+
+{/*
+  Docencia queda condensada y colocada después del material técnico: suma como
+  diferenciador sin competir con el mensaje principal en la parte alta de la
+  página. La entrada de 2022 estaba duplicada en Experiencia; ahora vive solo
+  aquí.
+*/}
+<Section id="docencia" title={teaching.title} intro={teaching.intro}>
+  <div class="border-t border-rule">
+    {
+      teaching.items.map((item) => (
+        <article class="border-b border-rule py-7">
+          <div class="flex flex-col gap-1 sm:grid sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-8">
+            <div class="order-2 sm:order-1">
+              <h3 class="text-body font-semibold">{item.role}</h3>
+              <p class="mt-0.5 text-meta text-ink/70">{item.org}</p>
+            </div>
+            <p class="nums order-1 text-meta text-ink/60 sm:order-2 sm:text-right">
+              {item.period}
+            </p>
+          </div>
+          <p class="mt-4 max-w-[68ch] text-body text-ink/85">{item.description}</p>
+        </article>
+      ))
+    }
+  </div>
+</Section>

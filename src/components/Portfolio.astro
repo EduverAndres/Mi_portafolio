@@ -1,0 +1,45 @@
+---
+import Hero from './Hero.astro';
+import About from './About.astro';
+import Experience from './Experience.astro';
+import Projects from './Projects.astro';
+import Section from './Section.astro';
+import Skills from './Skills';
+import Teaching from './Teaching.astro';
+import Education from './Education.astro';
+import Contact from './Contact.astro';
+import { CORE_SKILLS } from '../data/site';
+import type { Dict, Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  dict: Dict;
+}
+
+const { lang, dict } = Astro.props;
+---
+
+<Hero lang={lang} dict={dict} />
+<About dict={dict} />
+<Experience dict={dict} />
+<Projects dict={dict} />
+
+<Section id="habilidades" title={dict.skills.title}>
+  {/* `client:visible` hidrata solo cuando la sección entra en pantalla. El
+      núcleo de ocho tecnologías ya viene renderizado en el HTML del build:
+      se lee aunque el JavaScript nunca llegue a ejecutarse. */}
+  <Skills
+    client:visible
+    core={CORE_SKILLS}
+    groups={dict.skills.groups}
+    labels={{
+      coreNote: dict.skills.coreNote,
+      more: dict.skills.moreLabel,
+      less: dict.skills.lessLabel,
+    }}
+  />
+</Section>
+
+<Teaching dict={dict} />
+<Education dict={dict} />
+<Contact dict={dict} />

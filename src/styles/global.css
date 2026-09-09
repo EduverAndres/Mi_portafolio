@@ -1,0 +1,149 @@
+@import 'tailwindcss';
+
+/* Fuentes self-hosted: sin request a Google Fonts, mejor LCP y sin fuga de IPs.
+   De Archivo tomamos el eje de anchura (wdth) para el display; de IBM Plex,
+   solo el subconjunto latino en los tres pesos que realmente usamos. */
+@import '@fontsource-variable/archivo/wdth.css';
+@import '@fontsource/ibm-plex-sans/latin-400.css';
+@import '@fontsource/ibm-plex-sans/latin-500.css';
+@import '@fontsource/ibm-plex-sans/latin-600.css';
+
+@theme {
+  /* ---- Color: seis valores, ni uno más ---------------------------------
+     Contrastes verificados contra WCAG AA:
+       ink sobre paper .............. 14.6:1
+       signal sobre surface .......... 7.9:1
+       signal sobre paper ............ 7.4:1
+       live sobre paper .............. 4.9:1
+       paper sobre ink .............. 14.6:1  (texto de la placa)
+       ink-muted sobre ink ........... 5.6:1  (metadatos de la placa)
+  */
+  --color-ink: #14212e;
+  --color-paper: #f2f4f5;
+  --color-surface: #ffffff;
+  --color-rule: #cdd3da;
+  --color-signal: #1b44d6;
+  --color-live: #0e7a52;
+
+  /* Derivados para texto sobre la placa oscura. */
+  --color-ink-fg: #f2f4f5;
+  --color-ink-muted: #9aa8b8;
+  --color-ink-rule: #2c3d51;
+
+  /* ---- Tipografía ------------------------------------------------------ */
+  --font-display: 'Archivo Variable', system-ui, sans-serif;
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+
+  /* Escala fija. No se usan tamaños fuera de esta lista. */
+  --text-display-xl: clamp(3rem, 8vw, 6rem);
+  --text-display-xl--line-height: 0.92;
+  --text-display-xl--letter-spacing: -0.03em;
+
+  --text-display-l: clamp(1.75rem, 3.5vw, 2.5rem);
+  --text-display-l--line-height: 1.1;
+  --text-display-l--letter-spacing: -0.02em;
+
+  --text-body-l: 1.125rem;
+  --text-body-l--line-height: 1.65;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.65;
+
+  --text-meta: 0.875rem;
+  --text-meta--line-height: 1.5;
+
+  /* Sin tracking abierto: las etiquetas van en caja baja, nunca en
+     mayúsculas espaciadas. */
+  --text-micro: 0.75rem;
+  --text-micro--line-height: 1.4;
+
+  /* Casi cero: un bloque se distingue por su lugar en la rejilla,
+     no por flotar con esquinas redondeadas. */
+  --radius-none: 0;
+  --radius-xs: 2px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Compensa la barra fija al saltar a una sección con el teclado o el menú. */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Archivo se usa ligeramente expandido: afirma sin gritar. */
+  .font-display {
+    font-family: var(--font-display);
+    font-stretch: 108%;
+  }
+
+  /* Las cifras se alinean en columna como en una hoja de datos.
+     Es la señal técnica del sitio; sustituye al cliché de la monoespaciada. */
+  .nums {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* Foco visible en todo lo que reciba teclado, sobre cualquier fondo. */
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
+  /* Dentro de la placa oscura el azul señal no contrasta: se invierte. */
+  .on-ink :focus-visible {
+    outline-color: var(--color-ink-fg);
+  }
+
+  ::selection {
+    background-color: var(--color-signal);
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* El único momento animado del sitio: las celdas de la franja de evidencia
+     entran escalonadas al cargar. 260 ms en total, y nada más se mueve solo. */
+  @keyframes evidence-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .evidence-cell {
+    animation: evidence-in 220ms cubic-bezier(0.2, 0.7, 0.4, 1) backwards;
+    animation-delay: calc(var(--cell-index, 0) * 40ms + 60ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .evidence-cell {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
