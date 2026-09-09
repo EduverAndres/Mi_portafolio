@@ -1,0 +1,4 @@
+# Los PDF de CV no llevan bytes nulos en la cabecera, asi que Git los
+# detecta como texto y con core.autocrlf convertiria sus LF en CRLF al
+# hacer checkout, corrompiendo la tabla xref. Se marcan binarios.
+*.pdf binary
