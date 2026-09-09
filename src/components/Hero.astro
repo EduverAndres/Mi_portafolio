@@ -227,13 +227,19 @@ const STEP_Y = 92;
 
 <script>
   /**
-   * Decodifica el titular: lo baraja con glifos y lo resuelve de izquierda a
-   * derecha, como un dato en bruto que se transforma. Es una mejora encima de
-   * contenido que ya está pintado, nunca la condición para verlo.
+   * Vida del titular, en dos tiempos.
    *
-   * Tres guardas: no se ejecuta con prefers-reduced-motion, no se ejecuta si
-   * el elemento no existe, y arranca tras el primer fotograma para no
-   * interferir con la medición del LCP.
+   * 1. Al cargar, el ancla se decodifica una vez: se baraja con glifos y se
+   *    resuelve de izquierda a derecha, como un dato en bruto que se
+   *    transforma.
+   * 2. Después, cada pocos segundos y a intervalos irregulares, dos o tres
+   *    caracteres parpadean brevemente. Es movimiento continuo pero casual:
+   *    nunca se repite igual y nunca ocupa el titular entero.
+   *
+   * Todo es una mejora encima de contenido ya pintado, nunca la condición para
+   * verlo. Se detiene con prefers-reduced-motion, con la pestaña en segundo
+   * plano y cuando el héroe sale de pantalla, para no gastar batería animando
+   * algo que nadie está mirando.
    */
   const objetivo = document.querySelector<HTMLElement>('[data-decode]');
   const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -243,13 +249,21 @@ const STEP_Y = 92;
     const glifos = '01</>{}[]#$%*+=~^';
     const FOTOGRAMAS = 34;
 
-    // Se fija el ancho antes de empezar: los glifos no miden lo mismo que las
-    // letras finales, y sin esto el titular bailaría mientras se resuelve.
+    /** Índices que pueden barajarse: los espacios se dejan quietos. */
+    const posiciones = [...textoFinal]
+      .map((caracter, indice) => (caracter === ' ' ? -1 : indice))
+      .filter((indice) => indice >= 0);
+
+    const glifoAlAzar = () => glifos[Math.floor(Math.random() * glifos.length)];
+
+    // El ancho se fija antes de barajar: los glifos no miden lo mismo que las
+    // letras finales, y sin esto el titular bailaría al resolverse.
     objetivo.style.display = 'inline-block';
     objetivo.style.minWidth = `${objetivo.getBoundingClientRect().width}px`;
-    objetivo.classList.add('decoding');
 
+    // ---- 1. Decodificación inicial -------------------------------------
     let fotograma = 0;
+    objetivo.classList.add('decoding');
 
     const paso = () => {
       const resueltos = Math.floor((fotograma / FOTOGRAMAS) * textoFinal.length);
@@ -257,13 +271,9 @@ const STEP_Y = 92;
 
       for (let i = 0; i < textoFinal.length; i++) {
         const caracter = textoFinal[i];
-        if (caracter === ' ') {
-          salida += ' ';
-        } else if (i < resueltos) {
-          salida += caracter;
-        } else {
-          salida += glifos[Math.floor(Math.random() * glifos.length)];
-        }
+        if (caracter === ' ') salida += ' ';
+        else if (i < resueltos) salida += caracter;
+        else salida += glifoAlAzar();
       }
 
       objetivo.textContent = salida;
@@ -274,11 +284,87 @@ const STEP_Y = 92;
       } else {
         objetivo.textContent = textoFinal;
         objetivo.classList.remove('decoding');
+
+        // Se suelta el ancho fijo: mantenerlo congelaría el titular a los
+        // píxeles de la primera carga y desbordaría al girar el móvil. En el
+        // parpadeo solo cambian dos o tres caracteres, así que no hace falta.
         objetivo.style.minWidth = '';
         objetivo.style.display = '';
+
+        iniciarParpadeo();
       }
     };
 
     requestAnimationFrame(() => requestAnimationFrame(paso));
+
+    // ---- 2. Parpadeo casual --------------------------------------------
+    let temporizador: number | undefined;
+    let visible = true;
+
+    /** Baraja dos o tres caracteres durante unos 200 ms y los devuelve. */
+    const parpadear = () => {
+      const cuantos = 2 + Math.floor(Math.random() * 2);
+      const elegidos = new Set<number>();
+      while (elegidos.size < cuantos) {
+        elegidos.add(posiciones[Math.floor(Math.random() * posiciones.length)]);
+      }
+
+      let repeticion = 0;
+      const REPETICIONES = 4;
+
+      const alterar = () => {
+        const letras = [...textoFinal];
+        for (const indice of elegidos) letras[indice] = glifoAlAzar();
+        objetivo.textContent = letras.join('');
+
+        repeticion += 1;
+        if (repeticion < REPETICIONES) {
+          window.setTimeout(alterar, 55);
+        } else {
+          objetivo.textContent = textoFinal;
+        }
+      };
+
+      alterar();
+    };
+
+    /** Intervalo irregular: entre 5 y 11 segundos, para que no se vuelva un
+     *  tic previsible que el ojo aprenda a ignorar. */
+    const programar = () => {
+      temporizador = window.setTimeout(() => {
+        parpadear();
+        programar();
+      }, 5000 + Math.random() * 6000);
+    };
+
+    /** Cuando nadie mira se cancela el temporizador, en vez de dejarlo
+     *  corriendo en vacío: ni trabajo ni batería de más. */
+    const sincronizar = () => {
+      const deberiaCorrer = visible && !document.hidden;
+
+      if (deberiaCorrer && temporizador === undefined) {
+        programar();
+      } else if (!deberiaCorrer && temporizador !== undefined) {
+        window.clearTimeout(temporizador);
+        temporizador = undefined;
+        objetivo.textContent = textoFinal;
+      }
+    };
+
+    const iniciarParpadeo = () => {
+      programar();
+
+      document.addEventListener('visibilitychange', sincronizar);
+
+      // Si el héroe no está en pantalla, no hay nada que animar.
+      const observador = new IntersectionObserver(
+        (entradas) => {
+          visible = entradas[0].isIntersecting;
+          sincronizar();
+        },
+        { threshold: 0 },
+      );
+      observador.observe(objetivo);
+    };
   }
 </script>

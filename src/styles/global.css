@@ -109,6 +109,15 @@
       linear-gradient(to bottom, color-mix(in srgb, var(--color-rule) 70%, transparent) 1px, transparent 1px);
     background-size: 64px 64px;
     mask-image: radial-gradient(120% 85% at 12% 0%, #000 18%, transparent 78%);
+    /* Un cuadro completo cada 80 s: imperceptible mirándolo de frente, pero
+       impide que la pantalla se sienta congelada. */
+    animation: grid-drift 80s linear infinite;
+  }
+
+  @keyframes grid-drift {
+    to {
+      background-position: 64px 64px;
+    }
   }
 
   /* Halo ámbar detrás del ancla. Va en un pseudo-elemento con blur para que
@@ -323,7 +332,8 @@
   .level-bar,
   .sheen-layer,
   .stack-item,
-  .word {
+  .word,
+  .grid-field {
     animation: none !important;
   }
 
