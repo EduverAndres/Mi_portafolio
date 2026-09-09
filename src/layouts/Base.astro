@@ -5,6 +5,11 @@ import { PERSON, CONTACT, SITE_URL, HERO_STACK } from '../data/site';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
+// Vite resuelve estas rutas al fichero final con hash, así que el preload
+// apunta siempre al archivo correcto sin escribirlo a mano.
+import archivoWoff2 from '@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2?url';
+import plexWoff2 from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url';
+
 interface Props {
   lang: Lang;
   dict: Dict;
@@ -69,6 +74,12 @@ const personSchema = {
     <title>{dict.meta.title}</title>
     <meta name="description" content={dict.meta.description} />
     <link rel="canonical" href={canonical} />
+
+    {/* Sin esto, el navegador descubre las fuentes solo después de descargar
+        y analizar el CSS: HTML -> CSS -> woff2. Esa cadena era la que empujaba
+        el LCP, porque el titular del héroe es el elemento más grande. */}
+    <link rel="preload" as="font" type="font/woff2" href={archivoWoff2} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={plexWoff2} crossorigin />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/favicon.svg" />

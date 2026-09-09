@@ -1,9 +1,11 @@
 @import 'tailwindcss';
 
 /* Fuentes self-hosted: sin request a Google Fonts, mejor LCP y sin fuga de IPs.
-   De Archivo tomamos el eje de anchura (wdth) para el display; de IBM Plex,
-   solo el subconjunto latino en los tres pesos que realmente usamos. */
-@import '@fontsource-variable/archivo/wdth.css';
+   De Archivo se toma el eje de peso, no el de anchura: la variante con wdth
+   pesa 90 KB frente a 35 KB, y estaba en la ruta crítica del LCP porque el
+   titular del héroe es el elemento más grande de la página. Un font-stretch
+   del 108 % no vale 55 KB. */
+@import '@fontsource-variable/archivo';
 @import '@fontsource/ibm-plex-sans/latin-400.css';
 @import '@fontsource/ibm-plex-sans/latin-500.css';
 @import '@fontsource/ibm-plex-sans/latin-600.css';
@@ -77,7 +79,6 @@
 
   .font-display {
     font-family: var(--font-display);
-    font-stretch: 108%;
   }
 
   /* Las cifras se alinean como en una hoja de datos. Es la señal técnica del
