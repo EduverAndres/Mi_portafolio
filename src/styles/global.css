@@ -219,6 +219,90 @@
     }
   }
 
+  /* ---- Efectos del héroe ------------------------------------------------
+     Tres capas sobre el bloque de posicionamiento. Ninguna oculta contenido:
+     el texto final está en el HTML y se lee aunque el JavaScript no llegue.
+
+     1) Decodificación del ancla. El titular se baraja con glifos y se resuelve
+        de izquierda a derecha, como un dato en bruto que se transforma. Lo
+        ejecuta un script diferido; sin él, el texto ya está correcto. */
+  .decoding {
+    color: var(--color-amber);
+  }
+
+  .decoding::after {
+    content: '';
+    display: inline-block;
+    width: 0.5em;
+    height: 0.78em;
+    margin-left: 0.08em;
+    background: var(--color-amber);
+    vertical-align: baseline;
+  }
+
+  /* 2) Destello que recorre el rol secundario, en una capa aparte para no
+        tocar el texto real que hay debajo. */
+  .sheen {
+    position: relative;
+    display: inline-block;
+  }
+
+  .sheen-layer {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+      100deg,
+      transparent 38%,
+      #fff6e0 50%,
+      transparent 62%
+    );
+    background-size: 260% 100%;
+    background-position: 220% 0;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    pointer-events: none;
+    animation: sheen 6.5s cubic-bezier(0.4, 0, 0.2, 1) 1.6s infinite;
+  }
+
+  @keyframes sheen {
+    0% {
+      background-position: 220% 0;
+    }
+    28%,
+    100% {
+      background-position: -120% 0;
+    }
+  }
+
+  /* 3) Las tecnologías se encienden en secuencia, como nodos que entran en
+        línea. Arrancan al 45 % de opacidad, nunca invisibles. */
+  .stack-item {
+    animation: stack-in 420ms ease-out backwards;
+    animation-delay: calc(var(--i, 0) * 110ms + 420ms);
+  }
+
+  @keyframes stack-in {
+    from {
+      opacity: 0.45;
+      color: var(--color-amber);
+    }
+  }
+
+  /* 4) La frase de posicionamiento se asienta palabra por palabra: pasa del
+        gris al blanco. Legible desde el primer frame, nunca en blanco. */
+  .word {
+    animation: word-settle 520ms ease-out backwards;
+    animation-delay: calc(var(--i, 0) * 26ms + 620ms);
+  }
+
+  @keyframes word-settle {
+    from {
+      color: var(--color-muted);
+    }
+  }
+
   /* Realce discreto al pasar por una fila de contacto o un proyecto. */
   .row-hover {
     transition:
@@ -236,8 +320,15 @@
   .node-pulse,
   .live-dot,
   .rise,
-  .level-bar {
+  .level-bar,
+  .sheen-layer,
+  .stack-item,
+  .word {
     animation: none !important;
+  }
+
+  .sheen-layer {
+    display: none;
   }
 
   .flow-line {

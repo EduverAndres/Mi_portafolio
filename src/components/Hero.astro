@@ -55,20 +55,44 @@ const STEP_Y = 92;
         {PERSON.name}
       </p>
 
-      {/* El ancla. Sin animación: es el elemento que define el LCP. */}
+      {/* El ancla. El texto final está aquí, en el HTML: si el script no se
+          ejecuta, se lee igual. El decodificador solo lo baraja por encima. */}
       <h1 id="hero-anchor" class="font-display mt-1 text-anchor font-bold text-text">
-        {hero.anchor}
+        <span data-decode>{hero.anchor}</span>
       </h1>
 
       {/* Refuerzo full stack: subordinado al ancla, pero con tecnologías
           concretas para que el perfil doble se lea de verdad. */}
       <p class="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <span class="text-display-l font-semibold text-amber">{hero.secondaryRole}</span>
-        <span class="text-meta text-muted">{hero.secondaryStack}</span>
+        {/* El destello va en una capa aparte, encima del texto real: si el
+            gradiente no se soporta, debajo sigue estando el rol legible. */}
+        <span class="sheen text-display-l font-semibold text-amber">
+          {hero.secondaryRole}
+          <span class="sheen-layer" aria-hidden="true">{hero.secondaryRole}</span>
+        </span>
+
+        <span class="text-meta text-muted">
+          {
+            hero.secondaryStack.split(' · ').map((tech, index) => (
+              <>
+                {index > 0 && <span aria-hidden="true"> · </span>}
+                <span class="stack-item inline-block" style={`--i: ${index}`}>
+                  {tech}
+                </span>
+              </>
+            ))
+          }
+        </span>
       </p>
 
+      {/* Se parte en palabras solo para escalonar el color. El texto sigue
+          siendo uno solo para un lector de pantalla y para copiar y pegar. */}
       <p class="mt-6 max-w-[54ch] text-body-l text-text/85">
-        {hero.positioning}
+        {
+          hero.positioning.split(' ').map((word, index) => (
+            <span class="word" style={`--i: ${index}`}>{word} </span>
+          ))
+        }
       </p>
 
       {/* Tres métricas, no cuatro genéricas. */}
@@ -200,3 +224,61 @@ const STEP_Y = 92;
     </figure>
   </div>
 </section>
+
+<script>
+  /**
+   * Decodifica el titular: lo baraja con glifos y lo resuelve de izquierda a
+   * derecha, como un dato en bruto que se transforma. Es una mejora encima de
+   * contenido que ya está pintado, nunca la condición para verlo.
+   *
+   * Tres guardas: no se ejecuta con prefers-reduced-motion, no se ejecuta si
+   * el elemento no existe, y arranca tras el primer fotograma para no
+   * interferir con la medición del LCP.
+   */
+  const objetivo = document.querySelector<HTMLElement>('[data-decode]');
+  const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (objetivo && !sinMovimiento) {
+    const textoFinal = objetivo.textContent ?? '';
+    const glifos = '01</>{}[]#$%*+=~^';
+    const FOTOGRAMAS = 34;
+
+    // Se fija el ancho antes de empezar: los glifos no miden lo mismo que las
+    // letras finales, y sin esto el titular bailaría mientras se resuelve.
+    objetivo.style.display = 'inline-block';
+    objetivo.style.minWidth = `${objetivo.getBoundingClientRect().width}px`;
+    objetivo.classList.add('decoding');
+
+    let fotograma = 0;
+
+    const paso = () => {
+      const resueltos = Math.floor((fotograma / FOTOGRAMAS) * textoFinal.length);
+      let salida = '';
+
+      for (let i = 0; i < textoFinal.length; i++) {
+        const caracter = textoFinal[i];
+        if (caracter === ' ') {
+          salida += ' ';
+        } else if (i < resueltos) {
+          salida += caracter;
+        } else {
+          salida += glifos[Math.floor(Math.random() * glifos.length)];
+        }
+      }
+
+      objetivo.textContent = salida;
+      fotograma += 1;
+
+      if (fotograma <= FOTOGRAMAS) {
+        requestAnimationFrame(paso);
+      } else {
+        objetivo.textContent = textoFinal;
+        objetivo.classList.remove('decoding');
+        objetivo.style.minWidth = '';
+        objetivo.style.display = '';
+      }
+    };
+
+    requestAnimationFrame(() => requestAnimationFrame(paso));
+  }
+</script>
