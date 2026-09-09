@@ -277,7 +277,6 @@ export const en: Dict = {
 
   footer: {
     location: 'Barranquilla, Colombia',
-    builtWith: 'Built with Astro, Preact and Tailwind CSS',
     toTop: 'Back to top',
   },
 };

@@ -297,7 +297,6 @@ export const es = {
 
   footer: {
     location: 'Barranquilla, Colombia',
-    builtWith: 'Hecho con Astro, Preact y Tailwind CSS',
     toTop: 'Volver arriba',
   },
 } as const;

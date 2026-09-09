@@ -19,13 +19,11 @@ const year = new Date().getFullYear();
       © {year} {PERSON.name} — {dict.footer.location}
     </p>
 
-    <p class="sm:ml-auto">{dict.footer.builtWith}</p>
-
     {/* Enlace, no botón con scroll por JavaScript: el desplazamiento suave lo
         pone el CSS y funciona sin hidratar nada. */}
     <a
       href="#main"
-      class="underline decoration-rule-strong underline-offset-4 transition-colors hover:text-text hover:decoration-amber"
+      class="underline decoration-rule-strong underline-offset-4 transition-colors hover:text-text hover:decoration-amber sm:ml-auto"
     >
       {dict.footer.toTop}
     </a>
