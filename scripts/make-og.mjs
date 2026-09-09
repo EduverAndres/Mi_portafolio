@@ -17,7 +17,7 @@ const INK = '#14212e';
 const PAPER = '#f2f4f5';
 const MUTED = '#9aa8b8';
 const RULE = '#2c3d51';
-const LIVE = '#0e7a52';
+const LIVE = '#34c48a';
 
 // Archivo no está instalada en el sistema que corre el build, así que la pila
 // degrada a la grotesca disponible. La identidad de la tarjeta la sostienen la

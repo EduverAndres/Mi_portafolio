@@ -66,7 +66,7 @@ export default function MobileNav({ links, labels, cvPath }: Props) {
         aria-expanded={open}
         aria-controls="mobile-nav-panel"
         aria-label={open ? labels.close : labels.open}
-        className="grid h-10 w-10 place-items-center text-ink"
+        className="grid h-10 w-10 place-items-center text-ink-fg"
       >
         {open ? (
           <X size={20} strokeWidth={1.75} aria-hidden="true" />
@@ -80,7 +80,7 @@ export default function MobileNav({ links, labels, cvPath }: Props) {
           id="mobile-nav-panel"
           ref={panelRef}
           tabIndex={-1}
-          className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-rule bg-paper px-5 py-8 outline-none sm:px-8"
+          className="on-ink fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-ink-rule bg-ink px-5 py-8 text-ink-fg outline-none sm:px-8"
         >
           <nav aria-label={labels.open}>
             <ul className="flex flex-col gap-1">
@@ -89,7 +89,7 @@ export default function MobileNav({ links, labels, cvPath }: Props) {
                   <a
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="block border-b border-rule py-4 text-body-l text-ink"
+                    className="block border-b border-ink-rule py-4 text-body-l text-ink-fg"
                   >
                     {link.label}
                   </a>
@@ -103,7 +103,7 @@ export default function MobileNav({ links, labels, cvPath }: Props) {
             target="_blank"
             rel="noopener"
             onClick={() => setOpen(false)}
-            className="mt-8 inline-flex rounded-xs bg-ink px-5 py-3 text-meta font-semibold text-ink-fg"
+            className="mt-8 inline-flex rounded-xs bg-paper px-5 py-3 text-meta font-semibold text-ink"
           >
             {labels.cv}
             <span className="sr-only"> ({labels.cvHint})</span>

@@ -10,20 +10,23 @@
 
 @theme {
   /* ---- Color: seis valores, ni uno más ---------------------------------
-     Contrastes verificados contra WCAG AA:
-       ink sobre paper .............. 14.6:1
-       signal sobre surface .......... 7.9:1
-       signal sobre paper ............ 7.4:1
-       live sobre paper .............. 4.9:1
-       paper sobre ink .............. 14.6:1  (texto de la placa)
-       ink-muted sobre ink ........... 5.6:1  (metadatos de la placa)
+     Contrastes medidos (WCAG AA pide 4.5 en texto, 3.0 en texto grande
+     y en componentes):
+       ink sobre paper ............. 14.79:1
+       paper sobre ink ............. 14.79:1  (texto de la placa)
+       signal sobre surface ......... 7.38:1
+       signal sobre paper ........... 6.69:1
+       ink-muted sobre ink .......... 6.74:1  (metadatos de la placa)
+       live sobre ink ............... 7.30:1  (punto de disponibilidad)
   */
   --color-ink: #14212e;
   --color-paper: #f2f4f5;
   --color-surface: #ffffff;
   --color-rule: #cdd3da;
   --color-signal: #1b44d6;
-  --color-live: #0e7a52;
+  /* Solo aparece una vez, y siempre sobre la placa: se elige claro para
+     que se despegue del fondo oscuro. */
+  --color-live: #34c48a;
 
   /* Derivados para texto sobre la placa oscura. */
   --color-ink-fg: #f2f4f5;
@@ -35,7 +38,7 @@
   --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
 
   /* Escala fija. No se usan tamaños fuera de esta lista. */
-  --text-display-xl: clamp(3rem, 8vw, 6rem);
+  --text-display-xl: clamp(2.75rem, 8vw, 6rem);
   --text-display-xl--line-height: 0.92;
   --text-display-xl--letter-spacing: -0.03em;
 

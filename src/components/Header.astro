@@ -24,8 +24,13 @@ const target = otherLang(lang);
 const targetPath = localizePath('/', target);
 ---
 
+{/*
+  La barra va en el mismo tono que la placa del héroe, de modo que la primera
+  pantalla se lee como un solo bloque en lugar de quedar cortada por una banda
+  clara. Sobre el resto de la página, que es de papel, sigue destacando.
+*/}
 <header
-  class="fixed top-0 right-0 left-0 z-50 border-b border-rule bg-paper/90 backdrop-blur-sm"
+  class="on-ink fixed top-0 right-0 left-0 z-50 border-b border-ink-rule bg-ink/95 text-ink-fg backdrop-blur-sm"
 >
   <div class="mx-auto flex h-16 max-w-6xl items-center gap-4 px-5 sm:px-8">
     <a
@@ -43,7 +48,7 @@ const targetPath = localizePath('/', target);
             <li>
               <a
                 href={link.href}
-                class="text-meta text-ink/75 transition-colors hover:text-ink"
+                class="text-meta text-ink-fg/70 transition-colors hover:text-ink-fg"
               >
                 {link.label}
               </a>
@@ -54,22 +59,24 @@ const targetPath = localizePath('/', target);
     </nav>
 
     {/* Cambiar de idioma es navegar a otra URL: un enlace basta.
-        Nada que hidratar, y funciona sin JavaScript. */}
+        Nada que hidratar, y funciona sin JavaScript. En pantallas estrechas
+        se reduce a las dos letras para no comerse la barra. */}
     <a
       href={targetPath}
       hreflang={LANGUAGES[target].htmlLang}
       rel="alternate"
-      class="ml-auto text-meta font-medium text-ink underline decoration-rule underline-offset-4 transition-colors hover:decoration-ink lg:ml-0"
-      aria-label={dict.nav.langLabel}
+      class="ml-auto text-meta font-medium text-ink-fg underline decoration-ink-muted underline-offset-4 transition-colors hover:decoration-ink-fg lg:ml-8"
+      aria-label={`${dict.nav.langLabel}: ${dict.nav.switchTo}`}
     >
-      {dict.nav.switchTo}
+      <span class="sm:hidden">{dict.nav.switchToShort}</span>
+      <span class="hidden sm:inline">{dict.nav.switchTo}</span>
     </a>
 
     <a
       href={CV_PATH}
       target="_blank"
       rel="noopener"
-      class="hidden rounded-xs bg-ink px-4 py-2 text-meta font-semibold text-ink-fg transition-opacity hover:opacity-90 sm:inline-flex"
+      class="hidden rounded-xs bg-paper px-4 py-2 text-meta font-semibold text-ink transition-colors hover:bg-white sm:inline-flex"
     >
       {dict.nav.cv}
       <span class="sr-only"> ({dict.hero.cvHint})</span>

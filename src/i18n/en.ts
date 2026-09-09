@@ -30,6 +30,7 @@ export const en: Dict = {
     skipToContent: 'Skip to content',
     langLabel: 'Change language',
     switchTo: 'Ver en español',
+    switchToShort: 'ES',
   },
 
   hero: {

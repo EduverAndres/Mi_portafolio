@@ -28,6 +28,7 @@ export const es = {
     skipToContent: 'Saltar al contenido',
     langLabel: 'Cambiar idioma',
     switchTo: 'View in English',
+    switchToShort: 'EN',
   },
 
   hero: {
